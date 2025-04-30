@@ -6,6 +6,9 @@ TagManager:
   tags:
   - BlendPlane0
   - BlendPlane1
+  - LowGround
+  - HighGround
+  - Walls
   layers:
   - Default
   - TransparentFX
