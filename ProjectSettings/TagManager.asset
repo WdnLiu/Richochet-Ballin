@@ -9,6 +9,9 @@ TagManager:
   - LowGround
   - HighGround
   - Walls
+  - Player1
+  - Player2
+  - Dropper
   layers:
   - Default
   - TransparentFX
