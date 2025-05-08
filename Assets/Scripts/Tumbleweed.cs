@@ -53,5 +53,4 @@ public class Tumbleweed : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

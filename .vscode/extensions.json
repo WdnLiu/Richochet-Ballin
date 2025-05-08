@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "ms-unity.unity-tools", // Or the current ID for the Microsoft Unity extension
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.csharp",
+        "csharpier.csharpier-vscode"
+    ]
+}

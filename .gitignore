@@ -70,3 +70,23 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# OSX / Linux specific
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+*.exe  # Windows builds
+*.xarchive # iOS XCode archive
+*.ipa # iOS app
+# etc. for other platforms like Linux, WebGL outputs if not in standard Build folder
+
+Packages/packages-lock.json~
+Packages/manifest.json~
+
+*.orig
