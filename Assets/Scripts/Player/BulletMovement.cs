@@ -9,6 +9,8 @@ public class BulletMovement : MonoBehaviour
 
     private Vector3 lastNormal;
 
+    public AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start() { }
 
@@ -41,6 +43,8 @@ public class BulletMovement : MonoBehaviour
 
             if (--maxBounces <= 0)
                 Destroy(gameObject);
+            else
+                audioManager.playSound("bounce");
         }
     }
 }

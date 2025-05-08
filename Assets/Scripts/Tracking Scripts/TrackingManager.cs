@@ -1,44 +1,62 @@
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-
 
 public class TrackingManager : MonoBehaviour
 {
     [Header("Dependencies")]
-    [SerializeField] private CalibrationUI calibrationUI;     // Handles UI interactions
+    [SerializeField]
+    private CalibrationUI calibrationUI; // Handles UI interactions
 
     [Header("Interface")]
-    [SerializeField] private GameObject trackingInterface;
+    [SerializeField]
+    private GameObject trackingInterface;
     private bool isInterfaceActive = false;
 
     // Enable or disable tracking plugin.
     [Header("On / Off")]
-    [SerializeField] private bool enableTracking;
+    [SerializeField]
+    private bool enableTracking;
 
     // Options for configuration
     [Header("Tracking Configuration")]
-    [SerializeField] private int numberOfPlayers;
-    [SerializeField] private int numberOfBaseStations;
-    [SerializeField] private bool enableRotation;
-    [SerializeField] private bool enableYAxis;
+    [SerializeField]
+    private int numberOfPlayers;
+
+    [SerializeField]
+    private int numberOfBaseStations;
+
+    [SerializeField]
+    private bool enableRotation;
+
+    [SerializeField]
+    private bool enableYAxis;
+
     //[SerializeField] private bool swapXZ;
     //[SerializeField] private bool invertX;
     //[SerializeField] private bool invertZ;
-    [Tooltip("Provided virtual world space is the size of the plane or surface that is seen as for height, as mush as one meter in the real world should match to")]
-    [SerializeField] private Vector3 virtualWorldSpace;
+    [Tooltip(
+        "Provided virtual world space is the size of the plane or surface that is seen as for height, as mush as one meter in the real world should match to"
+    )]
+    [SerializeField]
+    private Vector3 virtualWorldSpace;
 
     //Players objects reference
     [Header("Player Objects")]
-    [SerializeField] private List<GameObject> players;
+    [SerializeField]
+    private List<GameObject> players;
 
     //Calibration path information
     [Header("Calibration File Path")]
-    [Tooltip("Provided path must be absolute <C:/usr/...> . If no path provided, file will be saved at default location")]
+    [Tooltip(
+        "Provided path must be absolute <C:/usr/...> . If no path provided, file will be saved at default location"
+    )]
     private string fullCalibrationSaveFilePath;
-    [SerializeField] private string calibrationSaveFilePath;
+
+    [SerializeField]
+    private string calibrationSaveFilePath;
     private string calibrationSaveFileName = "trackingCalibration";
 
     //Calibration information
@@ -50,8 +68,11 @@ public class TrackingManager : MonoBehaviour
 
     // Attributes for non-tracking input
     [Header("Non-tracking")]
-    [SerializeField] private int playerSelected = 1;
-    [SerializeField] private int trackingDisabledPlayerSpeed = 5;
+    [SerializeField]
+    private int playerSelected = 1;
+
+    [SerializeField]
+    private int trackingDisabledPlayerSpeed = 5;
 
     private int playerRotDatatSize = 7;
     private float positionUpdateInterval = 0.01f;
@@ -62,11 +83,12 @@ public class TrackingManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-
         // Validate dependencies
         if (calibrationUI == null)
         {
-            Debug.LogError("Missing one or more dependencies. Assign required scripts in the Inspector.");
+            Debug.LogError(
+                "Missing one or more dependencies. Assign required scripts in the Inspector."
+            );
             return;
         }
 
@@ -115,7 +137,8 @@ public class TrackingManager : MonoBehaviour
         {
             calibrationSaveFilePath = Application.persistentDataPath;
         }
-        fullCalibrationSaveFilePath = calibrationSaveFilePath + "/" + calibrationSaveFileName + ".json";
+        fullCalibrationSaveFilePath =
+            calibrationSaveFilePath + "/" + calibrationSaveFileName + ".json";
 
         //load calibration if saved
         LoadCalibrationJson();
@@ -136,7 +159,6 @@ public class TrackingManager : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// Load the calibration saved in the file and give feedback.
     /// </summary>
@@ -155,7 +177,9 @@ public class TrackingManager : MonoBehaviour
         }
         catch (Exception)
         {
-            Debug.Log("Calibration not found. If you want to Start with a preloaded calibration, please generate a file with 'Save Current Calibration' button");
+            Debug.Log(
+                "Calibration not found. If you want to Start with a preloaded calibration, please generate a file with 'Save Current Calibration' button"
+            );
             calibrationUI.SetCalibrationFileStatus("Calibration Failed!");
         }
     }
@@ -175,22 +199,41 @@ public class TrackingManager : MonoBehaviour
                 int playerIndex = i * playerRotDatatSize;
 
                 // Get position from openvr array
-                Vector3 playersRawPosition = new Vector3(openVrOutputArr[0 + playerIndex], openVrOutputArr[1 + playerIndex], openVrOutputArr[2 + playerIndex]);
+                Vector3 playersRawPosition = new Vector3(
+                    openVrOutputArr[0 + playerIndex],
+                    openVrOutputArr[1 + playerIndex],
+                    openVrOutputArr[2 + playerIndex]
+                );
 
-                Quaternion playerRotation = new Quaternion(openVrOutputArr[3 + playerIndex], openVrOutputArr[4 + playerIndex], openVrOutputArr[5 + playerIndex], openVrOutputArr[6 + playerIndex]);
+                Quaternion playerRotation = new Quaternion(
+                    openVrOutputArr[3 + playerIndex],
+                    openVrOutputArr[4 + playerIndex],
+                    openVrOutputArr[5 + playerIndex],
+                    openVrOutputArr[6 + playerIndex]
+                );
 
                 if (calibrated)
                 {
                     //Calculates the calibrated position using the Calibration data
-                    Vector3 calibratedPos = CalibrationUtils.CalibrateRawPos(playersRawPosition, enableYAxis, calibration, virtualWorldSpace);
+                    Vector3 calibratedPos = CalibrationUtils.CalibrateRawPos(
+                        playersRawPosition,
+                        enableYAxis,
+                        calibration,
+                        virtualWorldSpace
+                    );
                     players[i].GetComponent<PlayerMovement>().SetPosition(calibratedPos);
                     calibrationUI.SetPlayerXPos(i, calibratedPos);
 
                     if (enableRotation)
                     {
                         //Calculates the calibrated rotation using the Calibration data
-                        Quaternion calibratedPlayerRotation = CalibrationUtils.CalibratedRawRot(playerRotation, calibration);
-                        players[i].GetComponent<PlayerMovement>().SetRotation(calibratedPlayerRotation);
+                        Quaternion calibratedPlayerRotation = CalibrationUtils.CalibratedRawRot(
+                            playerRotation,
+                            calibration
+                        );
+                        players[i]
+                            .GetComponent<PlayerMovement>()
+                            .SetRotation(calibratedPlayerRotation);
                         calibrationUI.SetPlayerXRot(i, calibratedPlayerRotation);
                     }
                 }
@@ -204,7 +247,6 @@ public class TrackingManager : MonoBehaviour
                         calibrationUI.SetPlayerXRot(i, playerRotation);
                     }
                 }
-
             }
 
             yield return new WaitForSeconds(positionUpdateInterval);
@@ -285,40 +327,70 @@ public class TrackingManager : MonoBehaviour
         }
     }
 
-    //read inputs form keyboard and move player selected when tracking is diabled
+    //read inputs form keyboard and move player selected when tracking is disabled
     private void DisabledTrackingPlayerMovement()
     {
+        GameObject currentPlayer = players[playerSelected - 1];
+
         if (Input.GetKey(KeyCode.W))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.forward * Time.deltaTime * trackingDisabledPlayerSpeed);
+            currentPlayer.transform.Translate(
+                Vector3.forward * Time.deltaTime * trackingDisabledPlayerSpeed
+            );
         }
         if (Input.GetKey(KeyCode.A))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.left * Time.deltaTime * trackingDisabledPlayerSpeed);
+            currentPlayer.transform.Translate(
+                Vector3.left * Time.deltaTime * trackingDisabledPlayerSpeed
+            );
         }
         if (Input.GetKey(KeyCode.S))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.back * Time.deltaTime * trackingDisabledPlayerSpeed);
+            currentPlayer.transform.Translate(
+                Vector3.back * Time.deltaTime * trackingDisabledPlayerSpeed
+            );
         }
         if (Input.GetKey(KeyCode.D))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.right * Time.deltaTime * trackingDisabledPlayerSpeed);
+            currentPlayer.transform.Translate(
+                Vector3.right * Time.deltaTime * trackingDisabledPlayerSpeed
+            );
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.up * Time.deltaTime * trackingDisabledPlayerSpeed);
+            currentPlayer.transform.Translate(
+                Vector3.up * Time.deltaTime * trackingDisabledPlayerSpeed
+            );
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            players[playerSelected - 1].transform.Translate(Vector3.down * Time.deltaTime * trackingDisabledPlayerSpeed);
+            currentPlayer.transform.Translate(
+                Vector3.down * Time.deltaTime * trackingDisabledPlayerSpeed
+            );
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            players[playerSelected - 1].transform.Rotate(Vector3.up * 30 * Time.deltaTime * trackingDisabledPlayerSpeed);
+            currentPlayer.transform.Rotate(
+                Vector3.up * 30 * Time.deltaTime * trackingDisabledPlayerSpeed
+            );
         }
         if (Input.GetKey(KeyCode.E))
         {
-            players[playerSelected - 1].transform.Rotate(Vector3.down * 30 * Time.deltaTime * trackingDisabledPlayerSpeed);
+            currentPlayer.transform.Rotate(
+                Vector3.down * 30 * Time.deltaTime * trackingDisabledPlayerSpeed
+            );
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            HeightChecker heightChecker = currentPlayer.GetComponent<HeightChecker>();
+            if (heightChecker != null)
+            {
+                heightChecker.shootBullet();
+            }
+            else
+            {
+                Debug.LogError("HeightChecker component not found on the player.");
+            }
         }
     }
 
@@ -339,7 +411,6 @@ public class TrackingManager : MonoBehaviour
     /// </summary>
     private void UpdateCalibrationUICalibrationData()
     {
-
         calibrationUI.SetCenter(calibration.GetCalibrationCenter());
         calibrationUI.SetPhysicalWorldSize(calibration.GetCalibrationRealWorldSize());
         calibrationUI.SetRotationOffset(calibration.GetCalibrationRotation());

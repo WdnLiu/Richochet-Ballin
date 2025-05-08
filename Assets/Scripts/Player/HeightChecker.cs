@@ -9,6 +9,7 @@ public class HeightChecker : MonoBehaviour
     private float timer = 0.0f;
     private float timeLimit = 1.0f;
 
+    public AudioManager audioManager;
     public GameObject bulletPrefab;
 
     // Start is called before the first frame update
@@ -18,15 +19,12 @@ public class HeightChecker : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            shootBullet();
-        }
     }
 
-    private void shootBullet()
+    public void shootBullet()
     {
         Instantiate(bulletPrefab, transform.position, transform.rotation);
+        audioManager.playSound("shoot");
     }
 
     private void OnTriggerEnter(Collider other)
