@@ -12,6 +12,8 @@ public class Tumbleweed : MonoBehaviour
     private float startY;
     private float bounceTimer;
 
+    public AudioManager audioManager;
+
     public void SetSpawner(TumbleweedSpawner spawner)
     {
         tumbleweedSpawner = spawner;
@@ -40,6 +42,14 @@ public class Tumbleweed : MonoBehaviour
         transform.position = pos;
         // Rotational movement (simulate rolling)
         transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+
+        manageSFX(bounceOffset);
+    }
+
+    private void manageSFX(float amplitude)
+    {
+        if (amplitude <= -bounceAmplitude + 0.5f)
+            audioManager.playSound("Tumbleweed");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,5 +63,4 @@ public class Tumbleweed : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

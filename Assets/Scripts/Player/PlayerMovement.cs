@@ -8,16 +8,11 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     public Quaternion q;
     public bool manual;
-    void Start()
-    {
 
-    }
+    void Start() { }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     // Setter for position
     public void SetPosition(Vector3 pos)
