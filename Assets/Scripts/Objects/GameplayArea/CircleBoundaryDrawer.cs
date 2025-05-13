@@ -7,15 +7,18 @@ public class CircleBoundaryDrawer : MonoBehaviour
     public int segmentCount = 100;
     public float yHeight = 0.01f; // Height added so it is displayed above the ground
     private LineRenderer lr;
+    public Material lineMaterial;
 
     void Start()
     {
         lr = GetComponent<LineRenderer>();
         lr.useWorldSpace = true;
         lr.positionCount = segmentCount + 1;
-        lr.material = new Material(Shader.Find("Unlit/Color"));
-        lr.material.color = Color.red;
-        lr.widthMultiplier = 1f;
+        //lr.material = new Material(Shader.Find("Unlit/Color"));
+        //lr.material.color = Color.red;
+        lr.material = lineMaterial;
+
+        lr.widthMultiplier = 0.2f;
         DrawCircleBoundary();
     }
 

@@ -9401,7 +9401,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circleObject: {fileID: 781613629}
   segmentCount: 100
-  yHeight: 0.01
+  yHeight: 0.5
+  lineMaterial: {fileID: 2100000, guid: fc9d7d07943ffed4fb30acb75c3f1515, type: 2}
 --- !u!120 &1889972044
 LineRenderer:
   m_ObjectHideFlags: 0
