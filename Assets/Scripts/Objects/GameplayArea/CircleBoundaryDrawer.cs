@@ -15,16 +15,17 @@ public class CircleBoundaryDrawer : MonoBehaviour
         lr.positionCount = segmentCount + 1;
         lr.material = new Material(Shader.Find("Unlit/Color"));
         lr.material.color = Color.red;
-        lr.widthMultiplier = 0.2f;
+        lr.widthMultiplier = 1f;
         DrawCircleBoundary();
     }
 
     void DrawCircleBoundary()
     {
-        if (circleObject == null) return;
+        if (circleObject == null)
+            return;
 
         Vector3 center = circleObject.position;
-        float radius = circleObject.localScale.x * 0.5f; // Using X scale as the diameter 
+        float radius = circleObject.localScale.x * 0.5f; // Using X scale as the diameter
 
         for (int i = 0; i <= segmentCount; i++)
         {

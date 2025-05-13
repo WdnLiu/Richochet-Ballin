@@ -17,8 +17,6 @@ public class HeightChecker : MonoBehaviour
     public AudioManager audioManager;
     public GameObject bulletPrefab;
 
-
-
     public GameObject cooldownIndicator;
 
     void Start()
@@ -31,9 +29,14 @@ public class HeightChecker : MonoBehaviour
     {
         bool fastFall = DetectFastMovement(-1, minDistance, maxDuration, Time.deltaTime);
 
-        if (fastFall && Time.time - lastShootTime >= shootCooldown) shootBullet();
+        if (fastFall && Time.time - lastShootTime >= shootCooldown)
+            shootBullet();
 
-        cooldownIndicator.transform.localScale = new Vector3(Mathf.Clamp(lastShootTime + 1 - Time.time, 0.0f, 1.0f), 1f, 1f);
+        cooldownIndicator.transform.localScale = new Vector3(
+            Mathf.Clamp(lastShootTime + 1 - Time.time, 0.0f, 1.0f),
+            1f,
+            1f
+        );
 
         lastHeight = transform.position.y;
     }
@@ -44,8 +47,12 @@ public class HeightChecker : MonoBehaviour
         float deltaY = currentHeight - lastHeight;
         float currentTime = Time.time;
 
-        bool isMovingInDesiredDirection = (direction == -1 && deltaY < -0.2f * deltaTime) || (direction == 1 && deltaY > 0.2f * deltaTime);
-        bool isOppositeDirection = (direction == -1 && deltaY > 0.2f * deltaTime) || (direction == 1 && deltaY < -0.2f * deltaTime);
+        bool isMovingInDesiredDirection =
+            (direction == -1 && deltaY < -0.2f * deltaTime)
+            || (direction == 1 && deltaY > 0.2f * deltaTime);
+        bool isOppositeDirection =
+            (direction == -1 && deltaY > 0.2f * deltaTime)
+            || (direction == 1 && deltaY < -0.2f * deltaTime);
 
         if (isOppositeDirection)
         {
@@ -54,7 +61,7 @@ public class HeightChecker : MonoBehaviour
             return false;
         }
 
-        if (!isMoving && isMovingInDesiredDirection) 
+        if (!isMoving && isMovingInDesiredDirection)
         {
             hasTriggered = false;
             isMoving = true;
@@ -89,12 +96,18 @@ public class HeightChecker : MonoBehaviour
     {
         Vector3 spawnPosition = new Vector3(transform.position.x, 0.0f, transform.position.z);
         Quaternion flatRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
-        
+
         Vector3 forwardDirection = flatRotation * Vector3.forward;
-        
-        GameObject bullet = Instantiate(bulletPrefab, spawnPosition + (forwardDirection * 10f), flatRotation);
+
+        GameObject bullet = Instantiate(
+            bulletPrefab,
+            spawnPosition + (forwardDirection * 10f),
+            flatRotation
+        );
         bullet.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
 
         lastShootTime = Time.time;
+
+        audioManager.playSound("shoot");
     }
 }
