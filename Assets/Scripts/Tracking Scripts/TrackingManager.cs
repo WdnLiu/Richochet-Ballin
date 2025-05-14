@@ -380,6 +380,12 @@ public class TrackingManager : MonoBehaviour
                 Vector3.down * 30 * Time.deltaTime * trackingDisabledPlayerSpeed
             );
         }
+        if (Input.GetKey(KeyCode.Y))
+        {
+            currentPlayer.transform.Rotate(
+                Vector3.left * 30 * Time.deltaTime * trackingDisabledPlayerSpeed
+            );
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             HeightChecker heightChecker = currentPlayer.GetComponent<HeightChecker>();

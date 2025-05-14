@@ -12,6 +12,7 @@ TagManager:
   - LowGround
   - HighGround
   - Walls
+  - Bullet
   layers:
   - Default
   - TransparentFX

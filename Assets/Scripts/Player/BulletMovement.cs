@@ -11,13 +11,24 @@ public class BulletMovement : MonoBehaviour
 
     public AudioManager audioManager;
 
-    // Start is called before the first frame update
+    private Rigidbody rb;
+    private float summonTime;
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.detectCollisions = false;
+        summonTime = Time.time;
+    }
+
     void Start() { }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
+        if (Time.time - summonTime > 0.2f)
+        {
+            rb.detectCollisions = true;
+        }
     }
 
     private void OnCollisionStay(Collision collision)
