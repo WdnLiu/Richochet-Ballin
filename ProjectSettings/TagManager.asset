@@ -13,6 +13,9 @@ TagManager:
   - HighGround
   - Walls
   - Bullet
+  - PowerUp
+  - Direction1
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX

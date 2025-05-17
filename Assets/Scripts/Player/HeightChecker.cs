@@ -18,6 +18,9 @@ public class HeightChecker : MonoBehaviour
     public GameObject bulletPrefab;
 
     public GameObject cooldownIndicator;
+    private int remainingDoubleShots = 0;
+
+    public float doubleShotOffset = 4f; // Space between bullets
 
     void Start()
     {
@@ -92,22 +95,49 @@ public class HeightChecker : MonoBehaviour
         return false;
     }
 
+    public void EnableDoubleShot(int numberOfShots)
+    {
+        remainingDoubleShots = numberOfShots;
+    }
+
     public void shootBullet()
     {
         Vector3 spawnPosition = new Vector3(transform.position.x, 0.0f, transform.position.z);
         Quaternion flatRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
-
         Vector3 forwardDirection = flatRotation * Vector3.forward;
+        Vector3 rightDirection = flatRotation * Vector3.right;
 
-        GameObject bullet = Instantiate(
-            bulletPrefab,
-            spawnPosition + (forwardDirection * 10f),
-            flatRotation
-        );
-        bullet.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+        if (remainingDoubleShots > 0)
+        {
+            Vector3 offset = rightDirection * doubleShotOffset * 1f;
+
+            GameObject bullet1 = Instantiate(
+                bulletPrefab,
+                (spawnPosition + offset) + (forwardDirection * 10f),
+                flatRotation
+            );
+            GameObject bullet2 = Instantiate(
+                bulletPrefab,
+                (spawnPosition - offset) + (forwardDirection * 10f),
+                flatRotation
+            );
+
+            bullet1.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+            bullet2.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+
+            remainingDoubleShots--;
+        }
+        else
+        {
+            GameObject bullet = Instantiate(
+                bulletPrefab,
+                spawnPosition + (forwardDirection * 10f),
+                flatRotation
+            );
+            bullet.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+        }
 
         lastShootTime = Time.time;
-
         audioManager.playSound("shoot");
     }
 }
