@@ -11,8 +11,11 @@ public class BulletMovement : MonoBehaviour
 
     public AudioManager audioManager;
 
+    public GameObject explosionParticles;
+
     private Rigidbody rb;
     private float summonTime;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,25 +40,39 @@ public class BulletMovement : MonoBehaviour
             lastNormal = collision.contacts[0].normal;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("BulletDeletor"))
+        {
+            explosionParticles.SetActive(true);
+            GetComponent<MeshRenderer>().enabled = false;
+            Destroy(gameObject, .5f);
+        }
+    }
+
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Walls"))
         {
-            Vector3 incomingDirection = transform.forward;
-            Vector3 normal = new Vector3(lastNormal.x, 0f, lastNormal.z).normalized;
-
-            float dot = Vector3.Dot(incomingDirection, normal);
-            Vector3 reflectedDirection = incomingDirection - 2 * dot * normal;
-
-            reflectedDirection.y = 0f;
-            reflectedDirection = reflectedDirection.normalized;
-
-            transform.rotation = Quaternion.LookRotation(reflectedDirection, Vector3.up);
-
             if (--maxBounces <= 0)
-                Destroy(gameObject);
+            {
+                explosionParticles.SetActive(true);
+                GetComponent<MeshRenderer>().enabled = false;
+                Destroy(gameObject, .5f);
+            }
             else
+            {
+                Vector3 incomingDirection = transform.forward;
+                Vector3 normal = new Vector3(lastNormal.x, 0f, lastNormal.z).normalized;
+
+                float dot = Vector3.Dot(incomingDirection, normal);
+                Vector3 reflectedDirection = incomingDirection - 2 * dot * normal;
+
+                reflectedDirection.y = 0f;
+                reflectedDirection = reflectedDirection.normalized;
+
+                transform.rotation = Quaternion.LookRotation(reflectedDirection, Vector3.up);
                 audioManager.playSound("bounce");
+            }
         }
     }
 }

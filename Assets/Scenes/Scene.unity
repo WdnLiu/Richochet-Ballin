@@ -8660,6 +8660,10 @@ PrefabInstance:
       value: Player2 Audio
       objectReference: {fileID: 0}
     - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
       propertyPath: sounds.Array.data[0].clip
       value: 
       objectReference: {fileID: 8300000, guid: 5e935d4e586de7140b392652d385e5cc, type: 3}
@@ -8668,11 +8672,27 @@ PrefabInstance:
       value: shoot
       objectReference: {fileID: 0}
     - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 23c7ae072232f694185062056defa12c, type: 3}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: playerHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
       propertyPath: sounds.Array.data[0].pitch
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.data[1].pitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
       propertyPath: sounds.Array.data[0].volume
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.data[1].volume
       value: 0.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10570,6 +10590,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1471923279}
     m_Modifications:
+    - target: {fileID: 260102476956286388, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 260102476956286388, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 260102476956286388, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.0078125
+      objectReference: {fileID: 0}
     - target: {fileID: 4472173031818060385, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
       propertyPath: m_Name
       value: LifePoints2
@@ -10634,6 +10666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Direction2
       objectReference: {fileID: 0}
+    - target: {fileID: 4472173032789306031, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 2000289061}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
 --- !u!4 &2028270333 stripped
@@ -11254,6 +11290,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1440896351}
     m_Modifications:
+    - target: {fileID: 260102476956286388, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 260102476956286388, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 260102476956286388, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4472173031818060391, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
       propertyPath: lifePointIcons.Array.data[0]
       value: 
@@ -11314,6 +11362,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Direction1
       objectReference: {fileID: 0}
+    - target: {fileID: 4472173032789306031, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 471291074}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
 --- !u!1 &5955992211103553672 stripped
@@ -11392,6 +11444,10 @@ PrefabInstance:
       value: Player1 Audio
       objectReference: {fileID: 0}
     - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
       propertyPath: sounds.Array.data[0].clip
       value: 
       objectReference: {fileID: 8300000, guid: 5e935d4e586de7140b392652d385e5cc, type: 3}
@@ -11400,11 +11456,27 @@ PrefabInstance:
       value: shoot
       objectReference: {fileID: 0}
     - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 23c7ae072232f694185062056defa12c, type: 3}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: playerHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
       propertyPath: sounds.Array.data[0].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
       propertyPath: sounds.Array.data[0].volume
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
+      propertyPath: sounds.Array.data[1].volume
       value: 0.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
