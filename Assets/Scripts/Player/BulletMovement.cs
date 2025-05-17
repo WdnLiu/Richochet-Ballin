@@ -46,6 +46,7 @@ public class BulletMovement : MonoBehaviour
         {
             explosionParticles.SetActive(true);
             GetComponent<MeshRenderer>().enabled = false;
+            rb.detectCollisions = false;
             Destroy(gameObject, .5f);
         }
     }
