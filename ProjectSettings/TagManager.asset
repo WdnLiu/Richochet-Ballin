@@ -16,6 +16,7 @@ TagManager:
   - PowerUp
   - Direction1
   - PlayerCollider
+  - BulletDeletor
   layers:
   - Default
   - TransparentFX
