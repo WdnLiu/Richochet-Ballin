@@ -44,6 +44,7 @@ public class StartExperience : MonoBehaviour
 
             playerTrigger = !playerTrigger;
         }
+        // Debug.Log("PlayerCollider exited the trigger.");
     }
 
     void Update()

@@ -3,10 +3,12 @@ using UnityEngine;
 class PauseState : IState
 {
     private GameStateManager gameStateManager;
-    private float timeElapsed = 0f;
 
     private GameObject player1;
     private GameObject player2;
+
+    private float timeElapsed = 0f;
+    private const float TIMER = 4f;
 
     public PauseState(GameStateManager manager)
     {
@@ -18,6 +20,7 @@ class PauseState : IState
     public void Enter()
     {
         gameStateManager.canFireBullet = false;
+        timeElapsed = 0f;
     }
 
     public void UpdateState()
@@ -26,13 +29,21 @@ class PauseState : IState
             player1.GetComponent<LifePoints>().lifePoints == 0
             || player2.GetComponent<LifePoints>().lifePoints == 0
         )
+        {
             gameStateManager.changeState(GameState.GameOver);
-        else
-            timeElapsed += Time.unscaledDeltaTime;
+            gameStateManager.winner = player1.GetComponent<LifePoints>().lifePoints == 0 ? 2 : 1;
+        }
 
-        if (timeElapsed >= 2f)
+        if (timeElapsed >= TIMER)
+        {
             gameStateManager.changeState(GameState.Playing);
+        }
+
+        timeElapsed += Time.unscaledDeltaTime;
     }
 
-    public void Exit() { }
+    public void Exit()
+    {
+        gameStateManager.wasHit = false;
+    }
 }

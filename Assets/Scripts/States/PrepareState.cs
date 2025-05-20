@@ -24,6 +24,12 @@ public class PrepareState : IState
         startZone1.SetActive(true);
         startZone2.SetActive(true);
         gameStateManager.canFireBullet = false;
+        timeElapsed = 0f;
+        GameObject.Find("LifePoints1").GetComponent<LifePoints>().setLifePoints(3);
+        GameObject.Find("LifePoints2").GetComponent<LifePoints>().setLifePoints(3);
+
+        startZone1.GetComponent<StartExperience>().playerTrigger = false;
+        startZone2.GetComponent<StartExperience>().playerTrigger = false;
     }
 
     public void UpdateState()

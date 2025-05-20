@@ -4023,6 +4023,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4472173033059009628, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
   m_PrefabInstance: {fileID: 4472173033774216139}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &771604840 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4472173032789306026, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+  m_PrefabInstance: {fileID: 2028270332}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &771604844
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771604840}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &772147959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2708781816862005071, guid: 6a14e84017cb1454d92df7e2ed623fa9, type: 3}
@@ -5118,6 +5139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canFireBullet: 0
   wasHit: 0
+  isPaused: 0
 --- !u!1001 &1082988958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5394,6 +5416,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151668547}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1153683440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4472173032789306026, guid: 45563978b56b6ba49aa35fc5806dd4d4, type: 3}
+  m_PrefabInstance: {fileID: 4472173033774216139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1153683444
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153683440}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1164081125
 GameObject:
   m_ObjectHideFlags: 0

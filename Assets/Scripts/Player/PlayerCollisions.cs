@@ -30,7 +30,7 @@ public class PlayerCollisions : MonoBehaviour
                 if (lifePoints != null)
                 {
                     lifePoints.GetComponent<LifePoints>()?.TakeDamage(1);
-                    // gameStateManager.wasHit = true;
+                    gameStateManager.wasHit = true;
                 }
                 audioManager.playSound("playerHit");
             }

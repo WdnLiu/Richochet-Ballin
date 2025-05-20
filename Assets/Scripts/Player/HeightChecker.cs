@@ -19,6 +19,7 @@ public class HeightChecker : MonoBehaviour
 
     public GameObject cooldownIndicator;
     private int remainingDoubleShots = 0;
+    private GameStateManager gameStateManager;
 
     public float doubleShotOffset = 4f; // Space between bullets
 
@@ -26,6 +27,7 @@ public class HeightChecker : MonoBehaviour
     {
         lastHeight = transform.position.y;
         peakHeight = lastHeight;
+        gameStateManager = GameObject.Find("Game State Manager").GetComponent<GameStateManager>();
     }
 
     void Update()
@@ -102,6 +104,8 @@ public class HeightChecker : MonoBehaviour
 
     public void shootBullet()
     {
+        if (gameStateManager.canFireBullet == false)
+            return;
         Vector3 spawnPosition = new Vector3(transform.position.x, 0.0f, transform.position.z);
         Quaternion flatRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
         Vector3 forwardDirection = flatRotation * Vector3.forward;

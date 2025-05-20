@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum GameState
@@ -14,6 +15,11 @@ public class GameStateManager : MonoBehaviour
 {
     public bool canFireBullet = false;
     public bool wasHit = false;
+    public bool isPaused = false;
+    public int winner = 0;
+
+    [Header("UI References")]
+    public TextMeshProUGUI winText;
 
     private GameObject player1;
     private GameObject player2;
@@ -49,8 +55,6 @@ public class GameStateManager : MonoBehaviour
     void Update()
     {
         gameState.UpdateState();
-
-        Debug.Log("Current State: " + gameState.GetType().Name);
     }
 
     public void changeState(GameState newState)

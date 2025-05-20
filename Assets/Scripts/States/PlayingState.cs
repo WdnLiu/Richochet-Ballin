@@ -19,12 +19,12 @@ public class PlayingState : IState
         if (gameStateManager.wasHit)
         {
             gameStateManager.changeState(GameState.Pause);
+            Debug.Log("wasHit: " + gameStateManager.wasHit);
         }
     }
 
     public void Exit()
     {
         gameStateManager.canFireBullet = false;
-        gameStateManager.wasHit = false;
     }
 }
