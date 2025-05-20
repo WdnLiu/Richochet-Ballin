@@ -3,6 +3,8 @@ using UnityEngine;
 class GameOverState : IState
 {
     private GameStateManager gameStateManager;
+    private float timeElapsed = 0f;
+    private const float TIMER = 2f;
 
     public GameOverState(GameStateManager manager)
     {
@@ -14,7 +16,15 @@ class GameOverState : IState
         gameStateManager.canFireBullet = false;
     }
 
-    public void UpdateState() { }
+    public void UpdateState()
+    {
+        timeElapsed += Time.unscaledDeltaTime;
+
+        if (timeElapsed >= TIMER)
+        {
+            gameStateManager.changeState(GameState.Prepare);
+        }
+    }
 
     public void Exit() { }
 }
