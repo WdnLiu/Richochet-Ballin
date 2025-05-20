@@ -3030,7 +3030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   calibrationUI: {fileID: 220600117}
   trackingInterface: {fileID: 220600112}
-  enableTracking: 0
+  enableTracking: 1
   numberOfPlayers: 2
   numberOfBaseStations: 4
   enableRotation: 1
@@ -10696,7 +10696,7 @@ MonoBehaviour:
   - {fileID: 132960592}
   - {fileID: 165532020}
   - {fileID: 1650205617}
-  spawnInterval: 1
+  spawnInterval: 8
   canSpawn: 0
 --- !u!4 &2000289060 stripped
 Transform:

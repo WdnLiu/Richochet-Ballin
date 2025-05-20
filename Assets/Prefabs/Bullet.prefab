@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b20fd072cc025ce4c80126a773290116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 40
   maxBounces: 2
   audioManager: {fileID: 7196125611224525111}
   explosionParticles: {fileID: 4599606278694211735}

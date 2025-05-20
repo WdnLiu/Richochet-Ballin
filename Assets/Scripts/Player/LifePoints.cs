@@ -56,8 +56,11 @@ public class LifePoints : MonoBehaviour
 
     public void Heal(int healAmount)
     {
-        lifePoints += healAmount;
-        UpdateLifePointIcons();
+        if (lifePoints < 3)
+        {
+            lifePoints += healAmount;
+            UpdateLifePointIcons();
+        }
     }
 
     public void setLifePoints(int newLifePoints)
