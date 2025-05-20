@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class LocalizedText : MonoBehaviour
 {
@@ -15,7 +15,9 @@ public class LocalizedText : MonoBehaviour
     {
         if (LanguageManager.Instance == null)
         {
-            Debug.LogWarning("LanguageManager is null. Please ensure LanguageManager is in the scene.");
+            Debug.LogWarning(
+                "LanguageManager is null. Please ensure LanguageManager is in the scene."
+            );
             return;
         }
 
@@ -32,4 +34,3 @@ public class LocalizedText : MonoBehaviour
         return translationsScripts;
     }
 }
-

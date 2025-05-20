@@ -8,6 +8,7 @@ public class PlayerCollisions : MonoBehaviour
     public Renderer meshRenderer; // Assign Direction → Mesh
     public Material shieldMaterial; // Shared shield material
     public AudioManager audioManager;
+    public GameStateManager gameStateManager;
 
     private Material originalMaterial; // Player-specific material
     private bool hasShield = false;
@@ -27,8 +28,10 @@ public class PlayerCollisions : MonoBehaviour
             else
             {
                 if (lifePoints != null)
+                {
                     lifePoints.GetComponent<LifePoints>()?.TakeDamage(1);
-
+                    // gameStateManager.wasHit = true;
+                }
                 audioManager.playSound("playerHit");
             }
 

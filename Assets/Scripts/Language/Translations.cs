@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class Translations : MonoBehaviour
 {
-
     public string english;
     public string spanish;
     public string catalan;
