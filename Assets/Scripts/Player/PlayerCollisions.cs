@@ -18,7 +18,7 @@ public class PlayerCollisions : MonoBehaviour
         gameStateManager = GameObject.Find("Game State Manager").GetComponent<GameStateManager>();
     }
 
-    public void removeShield()
+    public void RemoveShield()
     {
         Debug.Log($"{gameObject.name} blocked damage with shield!");
         hasShield = false;
@@ -33,7 +33,7 @@ public class PlayerCollisions : MonoBehaviour
         {
             if (hasShield)
             {
-                removeShield();
+                RemoveShield();
             }
             else
             {

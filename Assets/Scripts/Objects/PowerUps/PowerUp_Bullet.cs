@@ -50,7 +50,7 @@ public class PowerUp_Bullet : MonoBehaviour
     )
     {
         if (playerCol != null)
-            playerCol.removeShield();
+            playerCol.RemoveShield();
         if (
             powerUpIndicatorMaterial != null
             && meshRenderer != null

@@ -21,8 +21,8 @@ public class GameStateManager : MonoBehaviour
     [Header("UI References")]
     public TextMeshProUGUI winText;
 
-    private GameObject player1;
-    private GameObject player2;
+    public GameObject player1;
+    public GameObject player2;
 
     private PrepareState prepareState;
     private PlayingState playingState;
