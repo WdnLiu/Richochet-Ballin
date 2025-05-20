@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num_shots: 1
+  powerUpIndicatorMaterial: {fileID: 2100000, guid: dd3db75d52cdf3c4dae398b63c6da52f, type: 2}
 --- !u!65 &3640813212980956203
 BoxCollider:
   m_ObjectHideFlags: 0

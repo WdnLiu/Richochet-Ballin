@@ -3030,7 +3030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   calibrationUI: {fileID: 220600117}
   trackingInterface: {fileID: 220600112}
-  enableTracking: 1
+  enableTracking: 0
   numberOfPlayers: 2
   numberOfBaseStations: 4
   enableRotation: 1
@@ -6497,6 +6497,7 @@ MonoBehaviour:
   audioManager: {fileID: 471291074}
   bulletPrefab: {fileID: 1938664410304469047, guid: dc6f9ee6bd8b5984b9841744cdbd8aee, type: 3}
   cooldownIndicator: {fileID: 765540247}
+  remainingMultipleShoots: 0
   doubleShotOffset: 1.5
 --- !u!114 &1440896354
 MonoBehaviour:
@@ -7041,6 +7042,7 @@ MonoBehaviour:
   audioManager: {fileID: 2000289061}
   bulletPrefab: {fileID: 1938664410304469047, guid: dc6f9ee6bd8b5984b9841744cdbd8aee, type: 3}
   cooldownIndicator: {fileID: 2028270335}
+  remainingMultipleShoots: 0
   doubleShotOffset: 1.5
 --- !u!114 &1471923282
 MonoBehaviour:
@@ -9362,6 +9364,7 @@ MonoBehaviour:
   audioManager: {fileID: 0}
   bulletPrefab: {fileID: 0}
   cooldownIndicator: {fileID: 0}
+  remainingMultipleShoots: 0
   doubleShotOffset: 1.5
 --- !u!1 &1866559963
 GameObject:
@@ -10686,9 +10689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpPrefabs:
-  - {fileID: 6937542239108970123, guid: 4b45d404662c340438013e50fb84d963, type: 3}
-  - {fileID: 1446625697121017572, guid: 5d9bd8f51ace4fe41b6aef351a15a1c6, type: 3}
   - {fileID: 7000559974619993349, guid: 9fb9e74893099cf469e452122745ae03, type: 3}
+  - {fileID: 6937542239108970123, guid: 4b45d404662c340438013e50fb84d963, type: 3}
   spawnPoints:
   - {fileID: 982819743}
   - {fileID: 1101636349}
@@ -10696,7 +10698,7 @@ MonoBehaviour:
   - {fileID: 132960592}
   - {fileID: 165532020}
   - {fileID: 1650205617}
-  spawnInterval: 8
+  spawnInterval: 1
   canSpawn: 0
 --- !u!4 &2000289060 stripped
 Transform:

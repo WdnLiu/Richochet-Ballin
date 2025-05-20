@@ -18,9 +18,10 @@ public class HeightChecker : MonoBehaviour
     public GameObject bulletPrefab;
 
     public GameObject cooldownIndicator;
-    private int remainingDoubleShots = 0;
+    public int remainingMultipleShoots = 0;
     private GameStateManager gameStateManager;
-
+    private Renderer meshRenderer;
+    private Material defaultMaterial;
     public float doubleShotOffset = 4f; // Space between bullets
 
     void Start()
@@ -97,11 +98,6 @@ public class HeightChecker : MonoBehaviour
         return false;
     }
 
-    public void EnableDoubleShot(int numberOfShots)
-    {
-        remainingDoubleShots = numberOfShots;
-    }
-
     public void shootBullet()
     {
         if (gameStateManager.canFireBullet == false)
@@ -111,7 +107,38 @@ public class HeightChecker : MonoBehaviour
         Vector3 forwardDirection = flatRotation * Vector3.forward;
         Vector3 rightDirection = flatRotation * Vector3.right;
 
-        if (remainingDoubleShots > 0)
+        if (remainingMultipleShoots > 0)
+        {
+            MultipleShoot(forwardDirection, rightDirection, spawnPosition, flatRotation);
+        }
+        else
+        {
+            GameObject bullet = Instantiate(
+                bulletPrefab,
+                spawnPosition + (forwardDirection * 10f),
+                flatRotation
+            );
+            bullet.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+        }
+
+        lastShootTime = Time.time;
+        audioManager.playSound("shoot");
+    }
+
+    public void EnableMultipleShoot(int shots, Renderer mesh, Material initialMaterial)
+    {
+        remainingMultipleShoots = shots;
+        meshRenderer = mesh;
+        defaultMaterial = initialMaterial;
+    }
+
+    private void MultipleShoot(
+        Vector3 forwardDirection,
+        Vector3 rightDirection,
+        Vector3 spawnPosition,
+        Quaternion flatRotation
+    )
+    {
         {
             Vector3 offset = rightDirection * doubleShotOffset * 1f;
 
@@ -136,19 +163,19 @@ public class HeightChecker : MonoBehaviour
             bullet2.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
             bullet3.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
 
-            remainingDoubleShots--;
-        }
-        else
-        {
-            GameObject bullet = Instantiate(
-                bulletPrefab,
-                spawnPosition + (forwardDirection * 10f),
-                flatRotation
-            );
-            bullet.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
-        }
+            remainingMultipleShoots--;
 
-        lastShootTime = Time.time;
-        audioManager.playSound("shoot");
+            if (remainingMultipleShoots <= 0)
+            {
+                RemoveMultipleShoot();
+            }
+        }
+    }
+
+    public void RemoveMultipleShoot()
+    {
+        remainingMultipleShoots = 0;
+        if (meshRenderer)
+            meshRenderer.material = defaultMaterial;
     }
 }
