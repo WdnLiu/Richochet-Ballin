@@ -23,7 +23,10 @@ public class PowerUpLogic : MonoBehaviour
         while (true)
         {
             yield return new WaitUntil(() => currentPowerUp == null);
-            yield return new WaitForSeconds(spawnInterval);
+
+            float randomOffset = Random.Range(-2f, 2f);
+            yield return new WaitForSeconds(spawnInterval + randomOffset);
+
             if (!currentPowerUp && canSpawn)
             {
                 SpawnPowerUp();
