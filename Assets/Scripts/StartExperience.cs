@@ -47,6 +47,11 @@ public class StartExperience : MonoBehaviour
         // Debug.Log("PlayerCollider exited the trigger.");
     }
 
+    public void setDefaultColor()
+    {
+        lastColor = originalColor;
+    }
+
     void Update()
     {
         if (lastColor != Color.white)

@@ -30,6 +30,9 @@ public class PrepareState : IState
 
         startZone1.GetComponent<StartExperience>().playerTrigger = false;
         startZone2.GetComponent<StartExperience>().playerTrigger = false;
+
+        startZone1.GetComponent<StartExperience>().setDefaultColor();
+        startZone2.GetComponent<StartExperience>().setDefaultColor();
     }
 
     public void UpdateState()

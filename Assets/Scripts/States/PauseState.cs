@@ -32,6 +32,7 @@ class PauseState : IState
         {
             gameStateManager.changeState(GameState.GameOver);
             gameStateManager.winner = player1.GetComponent<LifePoints>().lifePoints == 0 ? 2 : 1;
+            Debug.Log("Winner variable value: " + gameStateManager.winner);
         }
 
         if (timeElapsed >= TIMER)

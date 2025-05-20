@@ -8,22 +8,32 @@ public class PlayerCollisions : MonoBehaviour
     public Renderer meshRenderer; // Assign Direction → Mesh
     public Material shieldMaterial; // Shared shield material
     public AudioManager audioManager;
-    public GameStateManager gameStateManager;
+    private GameStateManager gameStateManager;
 
     private Material originalMaterial; // Player-specific material
     private bool hasShield = false;
 
+    void Start()
+    {
+        gameStateManager = GameObject.Find("Game State Manager").GetComponent<GameStateManager>();
+    }
+
+    public void removeShield()
+    {
+        Debug.Log($"{gameObject.name} blocked damage with shield!");
+        hasShield = false;
+
+        if (meshRenderer != null && originalMaterial != null)
+            meshRenderer.material = originalMaterial;
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet"))
+        if (other.CompareTag("Bullet") && !gameStateManager.wasHit)
         {
             if (hasShield)
             {
-                Debug.Log($"{gameObject.name} blocked damage with shield!");
-                hasShield = false;
-
-                if (meshRenderer != null && originalMaterial != null)
-                    meshRenderer.material = originalMaterial;
+                removeShield();
             }
             else
             {

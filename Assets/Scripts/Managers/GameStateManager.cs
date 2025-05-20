@@ -29,6 +29,8 @@ public class GameStateManager : MonoBehaviour
     private PauseState pauseState;
     private GameOverState gameOverState;
 
+    public PowerUpLogic powerUpManager;
+
     private Dictionary<GameState, IState> stateMap = new Dictionary<GameState, IState>();
 
     private IState gameState;
@@ -42,6 +44,7 @@ public class GameStateManager : MonoBehaviour
         playingState = new PlayingState(this);
         pauseState = new PauseState(this);
         gameOverState = new GameOverState(this);
+        powerUpManager = GameObject.Find("PowerUpManager").GetComponent<PowerUpLogic>();
 
         stateMap[GameState.Prepare] = prepareState;
         stateMap[GameState.Playing] = playingState;

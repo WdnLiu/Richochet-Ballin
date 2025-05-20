@@ -14,15 +14,17 @@ class GameOverState : IState
     {
         gameStateManager = manager;
         // environment = GameObject.Find("Environment");
-        // winnerText = gameStateManager.winText;
     }
 
     public void Enter()
     {
         gameStateManager.canFireBullet = false;
-        // environment.SetActive(false);
+        timeElapsed = 0f;
+        gameStateManager.powerUpManager.HandlePowerUpCollected();
 
-        // winnerText.text = "Player " + gameStateManager.winner + " wins!";
+        //winnerText = gameStateManager.winText;
+        // environment.SetActive(false);
+        //winnerText.text = "Player " + gameStateManager.winner + " wins!";
 
         // winnerText.gameObject.SetActive(true);
     }

@@ -117,17 +117,24 @@ public class HeightChecker : MonoBehaviour
 
             GameObject bullet1 = Instantiate(
                 bulletPrefab,
-                (spawnPosition + offset) + (forwardDirection * 10f),
+                (spawnPosition + 2 * offset) + (forwardDirection * 10f),
                 flatRotation
             );
             GameObject bullet2 = Instantiate(
                 bulletPrefab,
-                (spawnPosition - offset) + (forwardDirection * 10f),
+                (spawnPosition - 2 * offset) + (forwardDirection * 10f),
+                flatRotation
+            );
+
+            GameObject bullet3 = Instantiate(
+                bulletPrefab,
+                (spawnPosition) + (forwardDirection * 10f),
                 flatRotation
             );
 
             bullet1.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
             bullet2.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+            bullet3.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
 
             remainingDoubleShots--;
         }

@@ -10,6 +10,8 @@ public class PowerUpLogic : MonoBehaviour
 
     private GameObject currentPowerUp;
 
+    public bool canSpawn;
+
     void Start()
     {
         Debug.Log("PowerUpLogic started!");
@@ -22,7 +24,7 @@ public class PowerUpLogic : MonoBehaviour
         {
             yield return new WaitUntil(() => currentPowerUp == null);
             yield return new WaitForSeconds(spawnInterval);
-            if (currentPowerUp == null)
+            if (!currentPowerUp && canSpawn)
             {
                 SpawnPowerUp();
             }
@@ -53,8 +55,10 @@ public class PowerUpLogic : MonoBehaviour
         }
     }
 
-    void HandlePowerUpCollected()
+    public void HandlePowerUpCollected()
     {
+        if (currentPowerUp)
+            Destroy(currentPowerUp);
         currentPowerUp = null;
     }
 }

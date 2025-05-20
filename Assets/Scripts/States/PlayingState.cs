@@ -12,6 +12,7 @@ public class PlayingState : IState
     public void Enter()
     {
         gameStateManager.canFireBullet = true;
+        gameStateManager.powerUpManager.canSpawn = true;
     }
 
     public void UpdateState()
@@ -26,5 +27,6 @@ public class PlayingState : IState
     public void Exit()
     {
         gameStateManager.canFireBullet = false;
+        gameStateManager.powerUpManager.canSpawn = false;
     }
 }
