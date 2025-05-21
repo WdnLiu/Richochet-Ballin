@@ -6378,6 +6378,7 @@ GameObject:
   - component: {fileID: 1440896353}
   - component: {fileID: 1440896354}
   - component: {fileID: 1440896348}
+  - component: {fileID: 1440896355}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -6514,6 +6515,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionIndicator: {fileID: 1769944657}
+--- !u!114 &1440896355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440896347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00317d99452a3964da09b1a687f89d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: 893099cddddc5b445885099910df7c32, type: 2}
+  MultipleShootMaterial: {fileID: 2100000, guid: dd3db75d52cdf3c4dae398b63c6da52f, type: 2}
+  ShieldMaterial: {fileID: 2100000, guid: 3195a6b5062f4874595fb7230a95eb36, type: 2}
+  HasShield: 0
+  HasBullet: 0
 --- !u!1 &1448092806
 GameObject:
   m_ObjectHideFlags: 0
@@ -6928,6 +6946,7 @@ GameObject:
   - component: {fileID: 1471923281}
   - component: {fileID: 1471923283}
   - component: {fileID: 1471923282}
+  - component: {fileID: 1471923284}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -7077,6 +7096,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionIndicator: {fileID: 2028270340}
+--- !u!114 &1471923284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471923275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00317d99452a3964da09b1a687f89d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: a7b03a207290de447b624608f4a560b7, type: 2}
+  MultipleShootMaterial: {fileID: 2100000, guid: dd3db75d52cdf3c4dae398b63c6da52f, type: 2}
+  ShieldMaterial: {fileID: 2100000, guid: 3195a6b5062f4874595fb7230a95eb36, type: 2}
+  HasShield: 0
+  HasBullet: 0
 --- !u!1001 &1473907519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10691,9 +10727,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpPrefabs:
-  - {fileID: 7000559974619993349, guid: 9fb9e74893099cf469e452122745ae03, type: 3}
   - {fileID: 6937542239108970123, guid: 4b45d404662c340438013e50fb84d963, type: 3}
   - {fileID: 1446625697121017572, guid: 5d9bd8f51ace4fe41b6aef351a15a1c6, type: 3}
+  - {fileID: 7000559974619993349, guid: 9fb9e74893099cf469e452122745ae03, type: 3}
   spawnPoints:
   - {fileID: 982819743}
   - {fileID: 1101636349}

@@ -20,15 +20,15 @@ public class HeightChecker : MonoBehaviour
     public GameObject cooldownIndicator;
     public int remainingMultipleShoots = 0;
     private GameStateManager gameStateManager;
-    private Renderer meshRenderer;
-    private Material defaultMaterial;
-    public float doubleShotOffset = 4f; // Space between bullets
+    private PlayerPowerUp playerPowerUp;
+    public float doubleShotOffset = 4f;
 
     void Start()
     {
         lastHeight = transform.position.y;
         peakHeight = lastHeight;
         gameStateManager = GameObject.Find("Game State Manager").GetComponent<GameStateManager>();
+        playerPowerUp = GetComponent<PlayerPowerUp>();
     }
 
     void Update()
@@ -107,7 +107,7 @@ public class HeightChecker : MonoBehaviour
         Vector3 forwardDirection = flatRotation * Vector3.forward;
         Vector3 rightDirection = flatRotation * Vector3.right;
 
-        if (remainingMultipleShoots > 0)
+        if (playerPowerUp.HasBullet)
         {
             MultipleShoot(forwardDirection, rightDirection, spawnPosition, flatRotation);
         }
@@ -123,13 +123,6 @@ public class HeightChecker : MonoBehaviour
 
         lastShootTime = Time.time;
         audioManager.playSound("shoot");
-    }
-
-    public void EnableMultipleShoot(int shots, Renderer mesh, Material initialMaterial)
-    {
-        remainingMultipleShoots = shots;
-        meshRenderer = mesh;
-        defaultMaterial = initialMaterial;
     }
 
     private void MultipleShoot(
@@ -163,19 +156,7 @@ public class HeightChecker : MonoBehaviour
             bullet2.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
             bullet3.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
 
-            remainingMultipleShoots--;
-
-            if (remainingMultipleShoots <= 0)
-            {
-                RemoveMultipleShoot();
-            }
+            playerPowerUp.RemoveBullet();
         }
-    }
-
-    public void RemoveMultipleShoot()
-    {
-        remainingMultipleShoots = 0;
-        if (meshRenderer)
-            meshRenderer.material = defaultMaterial;
     }
 }

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PowerUp_Shield : MonoBehaviour
 {
-    private HeightChecker checker;
-
     private void Start()
     {
         transform.rotation = Quaternion.Euler(
@@ -19,28 +17,11 @@ public class PowerUp_Shield : MonoBehaviour
             return;
 
         Transform current = other.transform;
-        while (current != null && !current.CompareTag("Direction1"))
-            current = current.parent;
-
-        if (current == null)
-            return;
-
-        PlayerCollisions player = current.GetComponentInChildren<PlayerCollisions>();
-
         while (current != null && !current.CompareTag("Player"))
             current = current.parent;
 
-        if (current == null)
-            return;
-
-        checker = current.GetComponentInChildren<HeightChecker>();
-
-        if (player != null)
-        {
-            checker.RemoveMultipleShoot();
-            player.ActivateShield();
-        }
-
+        PlayerPowerUp powerUpHandler = current.GetComponent<PlayerPowerUp>();
+        powerUpHandler.ActivatePowerUp("Shield");
         GetComponent<PowerUp>()?.Collect(current);
     }
 }

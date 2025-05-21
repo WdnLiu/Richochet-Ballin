@@ -22,11 +22,8 @@ class GameOverState : IState
         timeElapsed = 0f;
         gameStateManager.powerUpManager.HandlePowerUpCollected();
 
-        gameStateManager.player1.GetComponentInChildren<HeightChecker>()?.RemoveMultipleShoot();
-        gameStateManager.player1.GetComponentInChildren<PlayerCollisions>()?.RemoveShield();
-
-        gameStateManager.player2.GetComponentInChildren<HeightChecker>()?.RemoveMultipleShoot();
-        gameStateManager.player2.GetComponentInChildren<PlayerCollisions>()?.RemoveShield();
+        gameStateManager.player1.GetComponent<PlayerPowerUp>()?.RemoveAllPowerUp();
+        gameStateManager.player2.GetComponent<PlayerPowerUp>()?.RemoveAllPowerUp();
 
         //winnerText = gameStateManager.winText;
         // environment.SetActive(false);
