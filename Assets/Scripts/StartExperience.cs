@@ -1,40 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StartExperience : MonoBehaviour
 {
-    public bool player1Trigger = false;
-    public bool player2Trigger = false;
-    bool startExperience = false;
+    public bool playerTrigger = false;
+    private Color lastColor = Color.white;
 
-    // Start is called before the first frame update
-    void Start() { }
+    private HashSet<Color> colorSet = new HashSet<Color>();
+    private Color originalColor = Color.white;
+
+    private void Start()
+    {
+        originalColor = GetComponent<Renderer>().material.color;
+        GetComponent<Renderer>().material.color = originalColor;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player1")
-            player1Trigger = true;
-        if (other.tag == "Player2")
-            player2Trigger = true;
-        Debug.Log(other.tag);
+        if (other.tag == "PlayerCollider")
+        {
+            playerTrigger = !playerTrigger;
+
+            GameObject player = other.transform.parent.parent.gameObject;
+            lastColor = player.GetComponent<Renderer>().material.color;
+            colorSet.Add(lastColor);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player1")
-            player1Trigger = false;
-        if (other.tag == "Player2")
-            player2Trigger = false;
+        if (other.tag == "PlayerCollider")
+        {
+            GameObject player = other.transform.parent.parent.gameObject;
+
+            colorSet.Remove(player.GetComponent<Renderer>().material.color);
+
+            if (player.GetComponent<Renderer>().material.color == lastColor)
+            {
+                lastColor = (colorSet.Count > 0) ? colorSet.FirstOrDefault() : originalColor;
+            }
+
+            playerTrigger = !playerTrigger;
+        }
+        // Debug.Log("PlayerCollider exited the trigger.");
     }
 
-    // Update is called once per frame
+    public void setDefaultColor()
+    {
+        lastColor = originalColor;
+    }
+
     void Update()
     {
-        if (player1Trigger && player2Trigger && !startExperience)
+        if (lastColor != Color.white)
         {
-            startExperience = true;
-            Debug.Log("Start experience");
+            GetComponent<Renderer>().material.color = lastColor;
+        }
+        else
+        {
+            GetComponent<Renderer>().material.color = originalColor;
         }
     }
 }

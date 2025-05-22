@@ -17,18 +17,11 @@ public class PowerUp_Shield : MonoBehaviour
             return;
 
         Transform current = other.transform;
-        while (current != null && !current.CompareTag("Direction1"))
+        while (current != null && !current.CompareTag("Player"))
             current = current.parent;
 
-        if (current == null)
-            return;
-
-        PlayerCollisions player = current.GetComponentInChildren<PlayerCollisions>();
-        if (player != null)
-        {
-            player.ActivateShield();
-        }
-
+        PlayerPowerUp powerUpHandler = current.GetComponent<PlayerPowerUp>();
+        powerUpHandler.ActivatePowerUp("Shield");
         GetComponent<PowerUp>()?.Collect(current);
     }
 }

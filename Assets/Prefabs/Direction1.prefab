@@ -168,6 +168,7 @@ MonoBehaviour:
   lifePoints: {fileID: 4472173031818060385}
   meshRenderer: {fileID: 861046190764746150}
   shieldMaterial: {fileID: 2100000, guid: 3195a6b5062f4874595fb7230a95eb36, type: 2}
+  audioManager: {fileID: 0}
 --- !u!136 &4472173032789306024
 CapsuleCollider:
   m_ObjectHideFlags: 0

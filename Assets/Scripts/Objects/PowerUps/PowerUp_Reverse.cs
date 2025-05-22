@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUp_Bullet : MonoBehaviour
+public class PowerUp_Reverse : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -8,13 +10,13 @@ public class PowerUp_Bullet : MonoBehaviour
             return;
 
         Transform current = other.transform;
-
         while (current != null && !current.CompareTag("Player"))
+        {
             current = current.parent;
+        }
 
-        PlayerPowerUp playerPowerUp = current.GetComponent<PlayerPowerUp>();
-        playerPowerUp.ActivatePowerUp("Bullet");
-
+        PlayerPowerUp powerUpHandler = current.GetComponent<PlayerPowerUp>();
+        powerUpHandler.ActivatePowerUp("Reverse");
         GetComponent<PowerUp>()?.Collect(current);
     }
 }

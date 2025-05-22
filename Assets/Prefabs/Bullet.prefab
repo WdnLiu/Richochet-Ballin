@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  maxBounces: 3
+  maxBounces: 2
   audioManager: {fileID: 7196125611224525111}
   explosionParticles: {fileID: 4599606278694211735}
 --- !u!1001 &1186350249063271313

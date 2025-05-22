@@ -12,11 +12,13 @@ public class LifePoints : MonoBehaviour
     private bool isHolyHandGrenadeActive = false;
     public float holyHandGrenadeTime = 0f;
     private float holyHandGrenadeDuration = 1f;
+    private GameStateManager gameStateManager;
 
     // Start is called before the first frame update
     void Start()
     {
         hitPulse.Stop();
+        gameStateManager = GameObject.Find("Game State Manager").GetComponent<GameStateManager>();
     }
 
     // Update is called once per frame
@@ -48,11 +50,22 @@ public class LifePoints : MonoBehaviour
         holyHandGrenade.transform.localRotation = Quaternion.identity;
         holyHandGrenadeTime = Time.time;
         isHolyHandGrenadeActive = true;
+
+        gameStateManager.wasHit = true;
     }
 
     public void Heal(int healAmount)
     {
-        lifePoints += healAmount;
+        if (lifePoints < 3)
+        {
+            lifePoints += healAmount;
+            UpdateLifePointIcons();
+        }
+    }
+
+    public void setLifePoints(int newLifePoints)
+    {
+        lifePoints = newLifePoints;
         UpdateLifePointIcons();
     }
 

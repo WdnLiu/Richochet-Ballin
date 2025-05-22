@@ -18,14 +18,17 @@ public class HeightChecker : MonoBehaviour
     public GameObject bulletPrefab;
 
     public GameObject cooldownIndicator;
-    private int remainingDoubleShots = 0;
-
-    public float doubleShotOffset = 4f; // Space between bullets
+    public int remainingMultipleShoots = 0;
+    private GameStateManager gameStateManager;
+    private PlayerPowerUp playerPowerUp;
+    public float doubleShotOffset = 4f;
 
     void Start()
     {
         lastHeight = transform.position.y;
         peakHeight = lastHeight;
+        gameStateManager = GameObject.Find("Game State Manager").GetComponent<GameStateManager>();
+        playerPowerUp = GetComponent<PlayerPowerUp>();
     }
 
     void Update()
@@ -95,37 +98,18 @@ public class HeightChecker : MonoBehaviour
         return false;
     }
 
-    public void EnableDoubleShot(int numberOfShots)
-    {
-        remainingDoubleShots = numberOfShots;
-    }
-
     public void shootBullet()
     {
+        if (gameStateManager.canFireBullet == false)
+            return;
         Vector3 spawnPosition = new Vector3(transform.position.x, 0.0f, transform.position.z);
         Quaternion flatRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
         Vector3 forwardDirection = flatRotation * Vector3.forward;
         Vector3 rightDirection = flatRotation * Vector3.right;
 
-        if (remainingDoubleShots > 0)
+        if (playerPowerUp.HasBullet)
         {
-            Vector3 offset = rightDirection * doubleShotOffset * 1f;
-
-            GameObject bullet1 = Instantiate(
-                bulletPrefab,
-                (spawnPosition + offset) + (forwardDirection * 10f),
-                flatRotation
-            );
-            GameObject bullet2 = Instantiate(
-                bulletPrefab,
-                (spawnPosition - offset) + (forwardDirection * 10f),
-                flatRotation
-            );
-
-            bullet1.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
-            bullet2.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
-
-            remainingDoubleShots--;
+            MultipleShoot(forwardDirection, rightDirection, spawnPosition, flatRotation);
         }
         else
         {
@@ -139,5 +123,40 @@ public class HeightChecker : MonoBehaviour
 
         lastShootTime = Time.time;
         audioManager.playSound("shoot");
+    }
+
+    private void MultipleShoot(
+        Vector3 forwardDirection,
+        Vector3 rightDirection,
+        Vector3 spawnPosition,
+        Quaternion flatRotation
+    )
+    {
+        {
+            Vector3 offset = rightDirection * doubleShotOffset * 1f;
+
+            GameObject bullet1 = Instantiate(
+                bulletPrefab,
+                (spawnPosition + 2 * offset) + (forwardDirection * 10f),
+                flatRotation
+            );
+            GameObject bullet2 = Instantiate(
+                bulletPrefab,
+                (spawnPosition - 2 * offset) + (forwardDirection * 10f),
+                flatRotation
+            );
+
+            GameObject bullet3 = Instantiate(
+                bulletPrefab,
+                (spawnPosition) + (forwardDirection * 10f),
+                flatRotation
+            );
+
+            bullet1.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+            bullet2.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+            bullet3.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+
+            playerPowerUp.RemoveAllPowerUp();
+        }
     }
 }
