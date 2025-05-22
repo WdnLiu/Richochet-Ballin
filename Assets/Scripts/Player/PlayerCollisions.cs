@@ -21,7 +21,7 @@ public class PlayerCollisions : MonoBehaviour
         {
             if (powerUpHandler.HasShield)
             {
-                powerUpHandler.RemoveShield();
+                powerUpHandler.RemoveAllPowerUp();
             }
             else
             {

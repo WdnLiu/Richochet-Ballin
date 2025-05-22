@@ -10,6 +10,7 @@ public class PlayerPowerUp : MonoBehaviour
     public Material ShieldMaterial;
     public bool HasShield;
     public bool HasBullet;
+    private GameStateManager gameStateManager;
 
     void Start()
     {
@@ -17,34 +18,55 @@ public class PlayerPowerUp : MonoBehaviour
         GameObject direction = GameObject.Find(directionName);
         Transform mesh = direction.transform.Find("Direction/Mesh");
         meshRenderer = mesh.GetComponent<Renderer>();
+        gameStateManager = GameObject.Find("Game State Manager").GetComponent<GameStateManager>();
     }
 
-    public void ActivateShield()
+    private void ActivateShield()
     {
         meshRenderer.material = ShieldMaterial;
         HasShield = true;
         Debug.Log($"{gameObject.name} activated shield!");
     }
 
-    public void RemoveShield()
+    private void RemoveShield()
     {
         meshRenderer.material = defaultMaterial;
         HasShield = false;
         Debug.Log($"{gameObject.name} shield removed.");
     }
 
-    public void ActivateBullet()
+    private void ActivateBullet()
     {
         meshRenderer.material = MultipleShootMaterial;
         HasBullet = true;
         Debug.Log($"{gameObject.name} activated bullet!");
     }
 
-    public void RemoveBullet()
+    private void RemoveBullet()
     {
         meshRenderer.material = defaultMaterial;
         HasBullet = false;
         Debug.Log($"{gameObject.name} bullet removed.");
+    }
+
+    private void ActivateReverse()
+    {
+        LifePoints life1 = gameStateManager.player1.GetComponentInChildren<LifePoints>();
+        LifePoints life2 = gameStateManager.player2.GetComponentInChildren<LifePoints>();
+
+        int temp = life1.lifePoints;
+        life1.setLifePoints(life2.lifePoints);
+        life2.setLifePoints(temp);
+    }
+
+    private void ActivateHeart()
+    {
+        string directionName = "Direction" + GetPlayerNumber();
+        GameObject direction = GameObject.Find(directionName);
+
+        PlayerCollisions playerCollisions = direction.GetComponentInChildren<PlayerCollisions>();
+        LifePoints lifePoints = playerCollisions.lifePoints.GetComponent<LifePoints>();
+        lifePoints.Heal(1);
     }
 
     void Update() { }
@@ -65,6 +87,14 @@ public class PlayerPowerUp : MonoBehaviour
         {
             RemoveAllPowerUp();
             ActivateBullet();
+        }
+        else if (powerUp == "Reverse")
+        {
+            ActivateReverse();
+        }
+        else if (powerUp == "Heart")
+        {
+            ActivateHeart();
         }
     }
 

@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUp_Heart : MonoBehaviour
+public class PowerUp_Reverse : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -12,8 +14,9 @@ public class PowerUp_Heart : MonoBehaviour
         {
             current = current.parent;
         }
+
         PlayerPowerUp powerUpHandler = current.GetComponent<PlayerPowerUp>();
-        powerUpHandler.ActivatePowerUp("Heart");
+        powerUpHandler.ActivatePowerUp("Reverse");
         GetComponent<PowerUp>()?.Collect(current);
     }
 }

@@ -156,7 +156,7 @@ public class HeightChecker : MonoBehaviour
             bullet2.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
             bullet3.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
 
-            playerPowerUp.RemoveBullet();
+            playerPowerUp.RemoveAllPowerUp();
         }
     }
 }
