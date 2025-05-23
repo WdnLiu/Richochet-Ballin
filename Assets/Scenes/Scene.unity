@@ -6533,8 +6533,6 @@ MonoBehaviour:
   HasShield: 0
   HasBullet: 0
   asteroidPrefab: {fileID: 4466902215901411421, guid: e12c84365f63fa04eaed84a3817166ed, type: 3}
-  meteorDelay: 5
-  meteorSpawnHeight: 10
 --- !u!1 &1448092806
 GameObject:
   m_ObjectHideFlags: 0
@@ -7117,8 +7115,6 @@ MonoBehaviour:
   HasShield: 0
   HasBullet: 0
   asteroidPrefab: {fileID: 4466902215901411421, guid: e12c84365f63fa04eaed84a3817166ed, type: 3}
-  meteorDelay: 5
-  meteorSpawnHeight: 10
 --- !u!1001 &1473907519
 PrefabInstance:
   m_ObjectHideFlags: 0

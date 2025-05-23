@@ -4,18 +4,20 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour
 {
     [Header("Meteor Settings")]
-    public float spawnHeight = 50f;
-    public float targetY = -5f;
-    public float delayBeforeFall = 5f;
-    public float fallDuration = 3f;
-
+    public float spawnHeight;
+    public float targetY;
+    public float delayBeforeFall;
+    public float fallDuration;
+    public GameObject shadowPrefab;
     private Transform target;
+    private GameObject shadowInstance;
 
     private void Update()
     {
         if (transform.position.y <= targetY)
         {
             Debug.Log("Meteor hit the ground!");
+            Destroy(shadowInstance);
             Destroy(gameObject);
         }
     }
@@ -25,6 +27,13 @@ public class Asteroid : MonoBehaviour
         target = new GameObject("MeteorTarget").transform;
         target.position = new Vector3(targetPosition.x, targetY, targetPosition.z);
         StartCoroutine(FallAfterDelay());
+        Vector3 shadowPosition = new Vector3(
+            target.position.x,
+            target.position.y + 10f,
+            target.position.z
+        );
+        Quaternion shadowRotation = Quaternion.Euler(180f, 0f, 0f);
+        shadowInstance = Instantiate(shadowPrefab, shadowPosition, shadowRotation);
     }
 
     private IEnumerator FallAfterDelay()
@@ -41,8 +50,6 @@ public class Asteroid : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-
         transform.position = end;
-        Debug.Log("Meteor hit the ground!");
     }
 }

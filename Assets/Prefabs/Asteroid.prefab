@@ -109,6 +109,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3265df75cce44b7458cfe1c5660c0e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnHeight: 100
+  targetY: -5
+  delayBeforeFall: 1
+  fallDuration: 4
+  shadowPrefab: {fileID: 7217518976902342535, guid: 347e593dd752b5b4f85583b4346b4b0b, type: 3}
 --- !u!54 &7855791167857147488
 Rigidbody:
   m_ObjectHideFlags: 0
