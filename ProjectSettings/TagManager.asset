@@ -17,6 +17,7 @@ TagManager:
   - Direction1
   - PlayerCollider
   - BulletDeletor
+  - Asteroid
   layers:
   - Default
   - TransparentFX

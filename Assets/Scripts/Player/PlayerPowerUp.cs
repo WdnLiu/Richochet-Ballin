@@ -11,6 +11,7 @@ public class PlayerPowerUp : MonoBehaviour
     public bool HasShield;
     public bool HasBullet;
     private GameStateManager gameStateManager;
+    public GameObject asteroidPrefab;
 
     void Start()
     {
@@ -69,6 +70,35 @@ public class PlayerPowerUp : MonoBehaviour
         lifePoints.Heal(1);
     }
 
+    private void ActivateTarget()
+    {
+        GameObject enemy = GetEnemyPlayer();
+        if (enemy != null)
+        {
+            StartCoroutine(SpawnMeteor(enemy.transform));
+            Debug.Log(
+                $"{gameObject.name} activated Target power-up! Meteor will fall in 5 seconds."
+            );
+        }
+    }
+
+    private IEnumerator SpawnMeteor(Transform enemyTransform)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (enemyTransform != null)
+        {
+            Vector3 spawnPos = new Vector3(
+                enemyTransform.position.x,
+                asteroidPrefab.GetComponent<Asteroid>().spawnHeight,
+                enemyTransform.position.z
+            );
+
+            GameObject meteor = Instantiate(asteroidPrefab, spawnPos, Quaternion.identity);
+            Asteroid asteroidScript = meteor.GetComponent<Asteroid>();
+            asteroidScript.Initialize(enemyTransform.position);
+        }
+    }
+
     void Update() { }
 
     int GetPlayerNumber()
@@ -96,11 +126,20 @@ public class PlayerPowerUp : MonoBehaviour
         {
             ActivateHeart();
         }
+        else if (powerUp == "Target")
+        {
+            ActivateTarget();
+        }
     }
 
     public void RemoveAllPowerUp()
     {
         RemoveShield();
         RemoveBullet();
+    }
+
+    public GameObject GetEnemyPlayer()
+    {
+        return gameObject.name.Contains("1") ? gameStateManager.player2 : gameStateManager.player1;
     }
 }

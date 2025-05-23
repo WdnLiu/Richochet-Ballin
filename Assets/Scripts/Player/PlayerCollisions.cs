@@ -17,7 +17,9 @@ public class PlayerCollisions : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet") && !gameStateManager.wasHit)
+        if (
+            (other.CompareTag("Bullet") || other.CompareTag("Asteroid")) && !gameStateManager.wasHit
+        )
         {
             if (powerUpHandler.HasShield)
             {
