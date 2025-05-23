@@ -34,6 +34,11 @@ public class PlayerCollisions : MonoBehaviour
                 }
                 audioManager.playSound("playerHit");
             }
+            if (other.CompareTag("Asteroid"))
+            {
+                powerUpHandler.RemoveMeteor();
+                return;
+            }
 
             Destroy(other.gameObject);
         }

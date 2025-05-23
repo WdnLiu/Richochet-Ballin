@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3265df75cce44b7458cfe1c5660c0e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnHeight: 100
+  spawnHeight: 150
   targetY: -5
   delayBeforeFall: 1
   fallDuration: 4

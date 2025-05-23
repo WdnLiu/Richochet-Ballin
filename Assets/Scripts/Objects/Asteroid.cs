@@ -29,7 +29,7 @@ public class Asteroid : MonoBehaviour
         StartCoroutine(FallAfterDelay());
         Vector3 shadowPosition = new Vector3(
             target.position.x,
-            target.position.y + 10f,
+            target.position.y + 5f,
             target.position.z
         );
         Quaternion shadowRotation = Quaternion.Euler(180f, 0f, 0f);
@@ -47,9 +47,17 @@ public class Asteroid : MonoBehaviour
         while (elapsed < fallDuration)
         {
             transform.position = Vector3.Lerp(start, end, elapsed / fallDuration);
+            transform.Rotate(Vector3.right * 360 * Time.deltaTime);
             elapsed += Time.deltaTime;
             yield return null;
         }
         transform.position = end;
+    }
+
+    public void RemoveAsteroid()
+    {
+        Destroy(shadowInstance);
+        shadowInstance = null;
+        Destroy(gameObject);
     }
 }
