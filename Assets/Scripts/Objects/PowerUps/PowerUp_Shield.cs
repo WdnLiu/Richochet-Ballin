@@ -23,7 +23,7 @@ public class PowerUp_Shield : MonoBehaviour
 
         PlayerPowerUp powerUpHandler = current.GetComponent<PlayerPowerUp>();
         audioManager.playSound("powerup");
-        
+
         powerUpHandler.ActivatePowerUp("Shield");
         GetComponent<PowerUp>()?.Collect(current);
     }
