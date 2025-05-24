@@ -13,6 +13,8 @@ public class PlayerPowerUp : MonoBehaviour
     private GameStateManager gameStateManager;
     public GameObject asteroidPrefab;
 
+    public AudioManager audioManager;
+
     void Start()
     {
         string directionName = "Direction" + GetPlayerNumber();
@@ -27,6 +29,8 @@ public class PlayerPowerUp : MonoBehaviour
         meshRenderer.material = ShieldMaterial;
         HasShield = true;
         Debug.Log($"{gameObject.name} activated shield!");
+
+        audioManager.playSound("shield");  
     }
 
     private void RemoveShield()
@@ -41,6 +45,8 @@ public class PlayerPowerUp : MonoBehaviour
         meshRenderer.material = MultipleShootMaterial;
         HasBullet = true;
         Debug.Log($"{gameObject.name} activated bullet!");
+
+        audioManager.playSound("bullet");  
     }
 
     private void RemoveBullet()
@@ -58,6 +64,8 @@ public class PlayerPowerUp : MonoBehaviour
         int temp = life1.lifePoints;
         life1.setLifePoints(life2.lifePoints);
         life2.setLifePoints(temp);
+
+        audioManager.playSound("reverse");  
     }
 
     private void ActivateHeart()
@@ -68,6 +76,8 @@ public class PlayerPowerUp : MonoBehaviour
         PlayerCollisions playerCollisions = direction.GetComponentInChildren<PlayerCollisions>();
         LifePoints lifePoints = playerCollisions.lifePoints.GetComponent<LifePoints>();
         lifePoints.Heal(1);
+
+        audioManager.playSound("heart");  
     }
 
     private void ActivateTarget()

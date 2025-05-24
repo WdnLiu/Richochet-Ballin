@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PowerUp_Heart : MonoBehaviour
 {
+    public AudioManager audioManager;
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("PlayerCollider"))
@@ -13,7 +14,9 @@ public class PowerUp_Heart : MonoBehaviour
             current = current.parent;
         }
         PlayerPowerUp powerUpHandler = current.GetComponent<PlayerPowerUp>();
+        audioManager.playSound("powerup");
         powerUpHandler.ActivatePowerUp("Heart");
+
         GetComponent<PowerUp>()?.Collect(current);
     }
 }

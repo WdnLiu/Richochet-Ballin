@@ -53,6 +53,7 @@ public class BulletMovement : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Walls"))
         {
             if (--maxBounces <= 0)
             {
