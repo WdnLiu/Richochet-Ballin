@@ -12,7 +12,6 @@ public class PlayerPowerUp : MonoBehaviour
     public bool HasBullet;
     private GameStateManager gameStateManager;
     public GameObject asteroidPrefab;
-    private Asteroid activeMeteor;
 
     void Start()
     {
@@ -95,15 +94,11 @@ public class PlayerPowerUp : MonoBehaviour
             );
 
             GameObject meteor = Instantiate(asteroidPrefab, spawnPos, Quaternion.identity);
-            activeMeteor = meteor.GetComponent<Asteroid>();
-            activeMeteor.Initialize(enemyTransform.position);
+            meteor.GetComponent<Asteroid>().Initialize(enemyTransform.position);
         }
     }
 
-    public void RemoveMeteor()
-    {
-        activeMeteor.RemoveAsteroid();
-    }
+    public void RemoveMeteor() { }
 
     void Update() { }
 
@@ -142,7 +137,6 @@ public class PlayerPowerUp : MonoBehaviour
     {
         RemoveShield();
         RemoveBullet();
-        RemoveMeteor();
     }
 
     public GameObject GetEnemyPlayer()
