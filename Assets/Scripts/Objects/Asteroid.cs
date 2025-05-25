@@ -12,13 +12,26 @@ public class Asteroid : MonoBehaviour
     private Transform target;
     private GameObject shadowInstance;
 
+    public ParticleSystem explosionEffect;
+
+    public Transform rotatingChild;
+    public MeshRenderer meteoriteMesh;
+
+    private void Start()
+    {
+        explosionEffect.Stop();
+    }
+
     private void Update()
     {
         if (transform.position.y <= targetY)
         {
+            explosionEffect.Play();
             Debug.Log("Meteor hit the ground!");
-            Destroy(shadowInstance);
-            Destroy(gameObject);
+            shadowInstance.GetComponent<MeshRenderer>().enabled = false;
+            meteoriteMesh.enabled = false;
+            Destroy(shadowInstance, 1f);
+            Destroy(gameObject, 1f);
         }
     }
 
@@ -47,7 +60,7 @@ public class Asteroid : MonoBehaviour
         while (elapsed < fallDuration)
         {
             transform.position = Vector3.Lerp(start, end, elapsed / fallDuration);
-            transform.Rotate(Vector3.right * 360 * Time.deltaTime);
+            rotatingChild.Rotate(Vector3.right * 360 * Time.deltaTime);
             elapsed += Time.deltaTime;
             yield return null;
         }

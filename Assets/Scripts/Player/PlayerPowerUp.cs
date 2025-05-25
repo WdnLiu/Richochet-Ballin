@@ -30,7 +30,7 @@ public class PlayerPowerUp : MonoBehaviour
         HasShield = true;
         Debug.Log($"{gameObject.name} activated shield!");
 
-        audioManager.playSound("shield");  
+        audioManager.playSound("shield");
     }
 
     private void RemoveShield()
@@ -46,7 +46,7 @@ public class PlayerPowerUp : MonoBehaviour
         HasBullet = true;
         Debug.Log($"{gameObject.name} activated bullet!");
 
-        audioManager.playSound("bullet");  
+        audioManager.playSound("bullet");
     }
 
     private void RemoveBullet()
@@ -65,7 +65,7 @@ public class PlayerPowerUp : MonoBehaviour
         life1.setLifePoints(life2.lifePoints);
         life2.setLifePoints(temp);
 
-        audioManager.playSound("reverse");  
+        audioManager.playSound("reverse");
     }
 
     private void ActivateHeart()
@@ -77,12 +77,13 @@ public class PlayerPowerUp : MonoBehaviour
         LifePoints lifePoints = playerCollisions.lifePoints.GetComponent<LifePoints>();
         lifePoints.Heal(1);
 
-        audioManager.playSound("heart");  
+        audioManager.playSound("heart");
     }
 
     private void ActivateTarget()
     {
         GameObject enemy = GetEnemyPlayer();
+        audioManager.playSound("meteor");
         if (enemy != null)
         {
             StartCoroutine(SpawnMeteor(enemy.transform));

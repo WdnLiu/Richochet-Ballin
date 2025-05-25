@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 4303501492668166830}
   - component: {fileID: 871095078353272075}
   - component: {fileID: 3166654039195027905}
-  - component: {fileID: 8471937218326785064}
   - component: {fileID: 3984755633082712765}
+  - component: {fileID: 8471937218326785064}
   - component: {fileID: 3575060975615618236}
   - component: {fileID: 470289186340519908}
   m_Layer: 0
   m_Name: PowerUp_Target
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,6 +89,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3984755633082712765
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527105080394852372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06590999, y: 0.06591, z: 0.13105501}
+  m_Center: {x: 0.000000001862645, y: -4.9598242e-12, z: 0.001331393}
 --- !u!54 &8471937218326785064
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -105,19 +118,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &3984755633082712765
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3527105080394852372}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.06590999, y: 0.06591, z: 0.13105501}
-  m_Center: {x: 0.000000001862645, y: -4.9598242e-12, z: 0.001331393}
 --- !u!114 &3575060975615618236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,5 +146,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 4466902215901411421, guid: e12c84365f63fa04eaed84a3817166ed, type: 3}
-  delay: 5
-  spawnHeight: 10

@@ -57,7 +57,8 @@ public class PlayerCollisions : MonoBehaviour
                     gameStateManager.wasHit = true;
                 }
                 audioManager.playSound("playerHit");
-                Destroy(collision.gameObject);
+                if (!collision.gameObject.CompareTag("Asteroid"))
+                    Destroy(collision.gameObject);
             }
             if (collision.gameObject.CompareTag("Asteroid"))
             {
