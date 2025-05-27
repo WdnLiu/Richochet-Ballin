@@ -34,7 +34,7 @@ public class PowerUpLogic : MonoBehaviour
         }
     }
 
-    void SpawnPowerUp()
+    public void SpawnPowerUp()
     {
         if (powerUpPrefabs.Length == 0 || spawnPoints.Length == 0)
         {

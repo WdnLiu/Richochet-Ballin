@@ -35,6 +35,9 @@ public class PlayerPowerUp : MonoBehaviour
 
     private void RemoveShield()
     {
+        if (!HasShield)
+            return;
+
         meshRenderer.material = defaultMaterial;
         HasShield = false;
         Debug.Log($"{gameObject.name} shield removed.");
@@ -51,6 +54,8 @@ public class PlayerPowerUp : MonoBehaviour
 
     private void RemoveBullet()
     {
+        if (!HasBullet)
+            return;
         meshRenderer.material = defaultMaterial;
         HasBullet = false;
         Debug.Log($"{gameObject.name} bullet removed.");

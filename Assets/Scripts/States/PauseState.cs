@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 class PauseState : IState
@@ -10,11 +11,15 @@ class PauseState : IState
     private float timeElapsed = 0f;
     private const float TIMER = 4f;
 
+    private TextMeshProUGUI winnerText;
+
     public PauseState(GameStateManager manager)
     {
         gameStateManager = manager;
         player1 = GameObject.Find("LifePoints1");
         player2 = GameObject.Find("LifePoints2");
+
+        winnerText = GameObject.Find("Winner Text").GetComponent<TextMeshProUGUI>();
     }
 
     public void Enter()
@@ -31,8 +36,12 @@ class PauseState : IState
         )
         {
             gameStateManager.changeState(GameState.GameOver);
-            gameStateManager.winner = player1.GetComponent<LifePoints>().lifePoints == 0 ? 2 : 1;
+            string winner = (player1.GetComponent<LifePoints>().lifePoints == 0) ? "Green" : "Blue";
+
+            winnerText.text = winner + " Player wins!";
+
             Debug.Log("Winner variable value: " + gameStateManager.winner);
+            return;
         }
 
         if (timeElapsed >= TIMER)

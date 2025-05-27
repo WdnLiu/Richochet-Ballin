@@ -398,6 +398,14 @@ public class TrackingManager : MonoBehaviour
                 Debug.LogError("HeightChecker component not found on the player.");
             }
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PowerUpLogic powerUpLogic = GameObject
+                .Find("PowerUpManager")
+                .GetComponent<PowerUpLogic>();
+
+            powerUpLogic.SpawnPowerUp();
+        }
     }
 
     /// <summary>

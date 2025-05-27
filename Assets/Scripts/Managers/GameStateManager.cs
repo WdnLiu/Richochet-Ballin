@@ -13,10 +13,11 @@ public enum GameState
 
 public class GameStateManager : MonoBehaviour
 {
+    public AudioManager audioManager;
     public bool canFireBullet = false;
     public bool wasHit = false;
     public bool isPaused = false;
-    public int winner = 0;
+    public string winner = "None";
 
     [Header("UI References")]
     public TextMeshProUGUI winText;
@@ -53,6 +54,8 @@ public class GameStateManager : MonoBehaviour
 
         gameState = prepareState;
         gameState.Enter();
+
+        // changeState(GameState.Playing);
     }
 
     void Update()

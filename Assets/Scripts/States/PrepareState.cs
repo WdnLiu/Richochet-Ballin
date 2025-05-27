@@ -8,6 +8,7 @@ public class PrepareState : IState
     private GameObject player2;
     private GameStateManager gameStateManager;
     private float timeElapsed = 0f;
+    private GameObject winScreen;
     const float TIMER = 2f;
 
     public PrepareState(GameStateManager manager)
@@ -17,6 +18,7 @@ public class PrepareState : IState
         startZone2 = GameObject.Find("StartPoint2");
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
+        winScreen = GameObject.Find("Winning Screen");
     }
 
     public void Enter()
@@ -33,6 +35,10 @@ public class PrepareState : IState
 
         startZone1.GetComponent<StartExperience>().setDefaultColor();
         startZone2.GetComponent<StartExperience>().setDefaultColor();
+
+        gameStateManager.audioManager.playSound("standoff");
+
+        winScreen.SetActive(false);
     }
 
     public void UpdateState()
@@ -74,5 +80,14 @@ public class PrepareState : IState
     {
         startZone1.SetActive(false);
         startZone2.SetActive(false);
+
+        gameStateManager.audioManager.FadeOut(
+            "standoff",
+            1f,
+            () =>
+            {
+                gameStateManager.audioManager.FadeIn("duel", 2f, 0.5f, () => { });
+            }
+        );
     }
 }

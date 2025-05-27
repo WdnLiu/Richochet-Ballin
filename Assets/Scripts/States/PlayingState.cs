@@ -13,6 +13,7 @@ public class PlayingState : IState
     {
         gameStateManager.canFireBullet = true;
         gameStateManager.powerUpManager.canSpawn = true;
+        gameStateManager.winText.gameObject.SetActive(true);
     }
 
     public void UpdateState()
