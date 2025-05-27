@@ -9,7 +9,8 @@ public class PrepareState : IState
     private GameStateManager gameStateManager;
     private float timeElapsed = 0f;
     private GameObject winScreen;
-    const float TIMER = 2f;
+    const float TIMER = 3.3f;
+    private bool isStartCondition = false;
 
     public PrepareState(GameStateManager manager)
     {
@@ -67,12 +68,24 @@ public class PrepareState : IState
 
             if (isFacingOut && isFacingAgainst)
             {
+                if (!isStartCondition)
+                {
+                    isStartCondition = true;
+                    gameStateManager.audioManager.playSound("countdown");
+                }
                 timeElapsed += Time.deltaTime;
             }
             else
             {
+                isStartCondition = false;
+                gameStateManager.audioManager.stopSound("countdown");
                 timeElapsed = 0f;
             }
+        }
+        else
+        {
+            isStartCondition = false;
+            gameStateManager.audioManager.stopSound("countdown");
         }
     }
 
@@ -86,7 +99,7 @@ public class PrepareState : IState
             1f,
             () =>
             {
-                gameStateManager.audioManager.FadeIn("duel", 2f, 0.5f, () => { });
+                gameStateManager.audioManager.FadeIn("duel", 2f, 0.2f, () => { });
             }
         );
     }

@@ -8,6 +8,8 @@ class PauseState : IState
     private GameObject player1;
     private GameObject player2;
 
+    private float gameOverTimeElapsed = 0f;
+
     private float timeElapsed = 0f;
     private const float TIMER = 4f;
 
@@ -35,8 +37,24 @@ class PauseState : IState
             || player2.GetComponent<LifePoints>().lifePoints == 0
         )
         {
+            if (gameOverTimeElapsed < TIMER)
+            {
+                gameOverTimeElapsed += Time.unscaledDeltaTime;
+                gameStateManager.audioManager.FadeOut(
+                    "duel",
+                    1f,
+                    () =>
+                    {
+                        // gameStateManager.audioManager.playSound("win");
+                        gameStateManager.audioManager.FadeIn("win", 4f, 0.2f, () => { });
+                    }
+                );
+                return;
+            }
+
             gameStateManager.changeState(GameState.GameOver);
-            string winner = (player1.GetComponent<LifePoints>().lifePoints == 0) ? "Green" : "Blue";
+            string winner =
+                (player1.GetComponent<LifePoints>().lifePoints == 0) ? "Green" : "Purple";
 
             winnerText.text = winner + " Player wins!";
 

@@ -27,15 +27,7 @@ class GameOverState : IState
 
         environment.SetActive(false);
 
-        gameStateManager.audioManager.FadeOut(
-            "duel",
-            1f,
-            () =>
-            {
-                gameStateManager.audioManager.playSound("win");
-                gameStateManager.audioManager.FadeIn("win", 2f, 0.5f, () => { });
-            }
-        );
+        gameStateManager.audioManager.FadeIn("win", 2f, 0.2f, () => { });
 
         winScreen.SetActive(true);
     }
