@@ -185,12 +185,11 @@ MonoBehaviour:
   spawnHeight: 150
   targetY: -5
   delayBeforeFall: 1
-  fallDuration: 4
+  fallDuration: 1
   shadowPrefab: {fileID: 7217518976902342535, guid: 347e593dd752b5b4f85583b4346b4b0b, type: 3}
   explosionEffect: {fileID: 2733654848556408950}
   rotatingChild: {fileID: 701341324753269483}
   meteoriteMesh: {fileID: 1869142162326129028}
-  audioManager: {fileID: 39660597904166534}
 --- !u!54 &7855791167857147488
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -498,14 +497,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3414015279734579581, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
   m_PrefabInstance: {fileID: 8297849617976159264}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &39660597904166534 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8334761419328987814, guid: e55cf9c1c36fc264f8144d4da6075d7e, type: 3}
-  m_PrefabInstance: {fileID: 8297849617976159264}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73bcae29441d93047a2df2071a450caf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
