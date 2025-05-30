@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerUp_Reverse : MonoBehaviour
 {
     public AudioManager audioManager;
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("PlayerCollider"))

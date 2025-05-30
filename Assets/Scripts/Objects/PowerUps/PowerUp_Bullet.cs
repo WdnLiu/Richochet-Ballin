@@ -20,7 +20,5 @@ public class PowerUp_Bullet : MonoBehaviour
         playerPowerUp.ActivatePowerUp("Bullet");
 
         GetComponent<PowerUp>()?.Collect(current);
-
-        
     }
 }

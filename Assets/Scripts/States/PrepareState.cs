@@ -9,8 +9,10 @@ public class PrepareState : IState
     private GameStateManager gameStateManager;
     private float timeElapsed = 0f;
     private GameObject winScreen;
-    const float TIMER = 3.3f;
+    const float TIMER = 2.8f;
     private bool isStartCondition = false;
+
+    private float startZoneInitTimer = 0f;
 
     public PrepareState(GameStateManager manager)
     {
@@ -24,8 +26,6 @@ public class PrepareState : IState
 
     public void Enter()
     {
-        startZone1.SetActive(true);
-        startZone2.SetActive(true);
         gameStateManager.canFireBullet = false;
         timeElapsed = 0f;
         GameObject.Find("LifePoints1").GetComponent<LifePoints>().setLifePoints(3);
@@ -40,6 +40,9 @@ public class PrepareState : IState
         gameStateManager.audioManager.playSound("standoff");
 
         winScreen.SetActive(false);
+        startZone1.SetActive(true);
+        startZone2.SetActive(true);
+        startZoneInitTimer = 0f;
     }
 
     public void UpdateState()
@@ -48,6 +51,8 @@ public class PrepareState : IState
         {
             gameStateManager.changeState(GameState.Playing);
         }
+
+        startZoneInitTimer += Time.unscaledDeltaTime;
 
         StartExperience startExperience1 = startZone1.GetComponent<StartExperience>();
         StartExperience startExperience2 = startZone2.GetComponent<StartExperience>();
@@ -66,7 +71,7 @@ public class PrepareState : IState
 
             bool isFacingAgainst = Vector3.Dot(direction1, direction2) < 0;
 
-            if (isFacingOut && isFacingAgainst)
+            if (isFacingOut && isFacingAgainst && startZoneInitTimer > 4f)
             {
                 if (!isStartCondition)
                 {

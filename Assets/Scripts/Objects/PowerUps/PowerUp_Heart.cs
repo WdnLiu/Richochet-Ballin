@@ -3,6 +3,7 @@ using UnityEngine;
 public class PowerUp_Heart : MonoBehaviour
 {
     public AudioManager audioManager;
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("PlayerCollider"))

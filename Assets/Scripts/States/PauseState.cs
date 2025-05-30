@@ -15,6 +15,8 @@ class PauseState : IState
 
     private TextMeshProUGUI winnerText;
 
+    private bool fadingOut = false;
+
     public PauseState(GameStateManager manager)
     {
         gameStateManager = manager;
@@ -27,7 +29,9 @@ class PauseState : IState
     public void Enter()
     {
         gameStateManager.canFireBullet = false;
+        fadingOut = false;
         timeElapsed = 0f;
+        gameOverTimeElapsed = 0f;
     }
 
     public void UpdateState()
@@ -40,15 +44,22 @@ class PauseState : IState
             if (gameOverTimeElapsed < TIMER)
             {
                 gameOverTimeElapsed += Time.unscaledDeltaTime;
-                gameStateManager.audioManager.FadeOut(
-                    "duel",
-                    1f,
-                    () =>
-                    {
-                        // gameStateManager.audioManager.playSound("win");
-                        gameStateManager.audioManager.FadeIn("win", 4f, 0.2f, () => { });
-                    }
-                );
+                if (!fadingOut)
+                {
+                    gameStateManager.powerUpManager.HandlePowerUpCollected();
+
+                    gameStateManager.player1.GetComponent<PlayerPowerUp>()?.RemoveAllPowerUp();
+                    gameStateManager.player2.GetComponent<PlayerPowerUp>()?.RemoveAllPowerUp();
+                    gameStateManager.audioManager.FadeOut(
+                        "duel",
+                        1f,
+                        () => {
+                            // gameStateManager.audioManager.playSound("win");
+                            // gameStateManager.audioManager.FadeIn("win", 4f, 0.2f, () => { });
+                        }
+                    );
+                    fadingOut = true;
+                }
                 return;
             }
 

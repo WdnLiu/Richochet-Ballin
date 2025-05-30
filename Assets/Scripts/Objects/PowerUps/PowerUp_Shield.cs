@@ -3,6 +3,7 @@ using UnityEngine;
 public class PowerUp_Shield : MonoBehaviour
 {
     public AudioManager audioManager;
+
     private void Start()
     {
         transform.rotation = Quaternion.Euler(
@@ -23,7 +24,7 @@ public class PowerUp_Shield : MonoBehaviour
 
         PlayerPowerUp powerUpHandler = current.GetComponent<PlayerPowerUp>();
         audioManager.playSound("powerup");
-        
+
         powerUpHandler.ActivatePowerUp("Shield");
         GetComponent<PowerUp>()?.Collect(current);
     }
