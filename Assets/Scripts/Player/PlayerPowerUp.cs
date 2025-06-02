@@ -11,6 +11,9 @@ public class PlayerPowerUp : MonoBehaviour
     public bool HasShield;
     public bool HasBullet;
     private GameStateManager gameStateManager;
+    public GameObject asteroidPrefab;
+
+    public AudioManager audioManager;
 
     void Start()
     {
@@ -26,10 +29,15 @@ public class PlayerPowerUp : MonoBehaviour
         meshRenderer.material = ShieldMaterial;
         HasShield = true;
         Debug.Log($"{gameObject.name} activated shield!");
+
+        audioManager.playSound("shield");
     }
 
     private void RemoveShield()
     {
+        if (!HasShield)
+            return;
+
         meshRenderer.material = defaultMaterial;
         HasShield = false;
         Debug.Log($"{gameObject.name} shield removed.");
@@ -40,10 +48,14 @@ public class PlayerPowerUp : MonoBehaviour
         meshRenderer.material = MultipleShootMaterial;
         HasBullet = true;
         Debug.Log($"{gameObject.name} activated bullet!");
+
+        audioManager.playSound("bullet");
     }
 
     private void RemoveBullet()
     {
+        if (!HasBullet)
+            return;
         meshRenderer.material = defaultMaterial;
         HasBullet = false;
         Debug.Log($"{gameObject.name} bullet removed.");
@@ -57,6 +69,8 @@ public class PlayerPowerUp : MonoBehaviour
         int temp = life1.lifePoints;
         life1.setLifePoints(life2.lifePoints);
         life2.setLifePoints(temp);
+
+        audioManager.playSound("reverse");
     }
 
     private void ActivateHeart()
@@ -67,7 +81,40 @@ public class PlayerPowerUp : MonoBehaviour
         PlayerCollisions playerCollisions = direction.GetComponentInChildren<PlayerCollisions>();
         LifePoints lifePoints = playerCollisions.lifePoints.GetComponent<LifePoints>();
         lifePoints.Heal(1);
+
+        audioManager.playSound("heart");
     }
+
+    private void ActivateTarget()
+    {
+        GameObject enemy = GetEnemyPlayer();
+        audioManager.playSound("meteor");
+        if (enemy != null)
+        {
+            StartCoroutine(SpawnMeteor(enemy.transform));
+            Debug.Log(
+                $"{gameObject.name} activated Target power-up! Meteor will fall in 5 seconds."
+            );
+        }
+    }
+
+    private IEnumerator SpawnMeteor(Transform enemyTransform)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (enemyTransform != null)
+        {
+            Vector3 spawnPos = new Vector3(
+                enemyTransform.position.x,
+                asteroidPrefab.GetComponent<Asteroid>().spawnHeight,
+                enemyTransform.position.z
+            );
+
+            GameObject meteor = Instantiate(asteroidPrefab, spawnPos, Quaternion.identity);
+            meteor.GetComponent<Asteroid>().Initialize(enemyTransform.position);
+        }
+    }
+
+    public void RemoveMeteor() { }
 
     void Update() { }
 
@@ -96,11 +143,20 @@ public class PlayerPowerUp : MonoBehaviour
         {
             ActivateHeart();
         }
+        else if (powerUp == "Target")
+        {
+            ActivateTarget();
+        }
     }
 
     public void RemoveAllPowerUp()
     {
         RemoveShield();
         RemoveBullet();
+    }
+
+    public GameObject GetEnemyPlayer()
+    {
+        return gameObject.name.Contains("1") ? gameStateManager.player2 : gameStateManager.player1;
     }
 }

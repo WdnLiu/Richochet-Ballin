@@ -8,7 +8,11 @@ public class PrepareState : IState
     private GameObject player2;
     private GameStateManager gameStateManager;
     private float timeElapsed = 0f;
-    const float TIMER = 2f;
+    private GameObject winScreen;
+    const float TIMER = 2.8f;
+    private bool isStartCondition = false;
+
+    private float startZoneInitTimer = 0f;
 
     public PrepareState(GameStateManager manager)
     {
@@ -17,12 +21,11 @@ public class PrepareState : IState
         startZone2 = GameObject.Find("StartPoint2");
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
+        winScreen = GameObject.Find("Winning Screen");
     }
 
     public void Enter()
     {
-        startZone1.SetActive(true);
-        startZone2.SetActive(true);
         gameStateManager.canFireBullet = false;
         timeElapsed = 0f;
         GameObject.Find("LifePoints1").GetComponent<LifePoints>().setLifePoints(3);
@@ -33,6 +36,13 @@ public class PrepareState : IState
 
         startZone1.GetComponent<StartExperience>().setDefaultColor();
         startZone2.GetComponent<StartExperience>().setDefaultColor();
+
+        gameStateManager.audioManager.playSound("standoff");
+
+        winScreen.SetActive(false);
+        startZone1.SetActive(true);
+        startZone2.SetActive(true);
+        startZoneInitTimer = 0f;
     }
 
     public void UpdateState()
@@ -41,6 +51,8 @@ public class PrepareState : IState
         {
             gameStateManager.changeState(GameState.Playing);
         }
+
+        startZoneInitTimer += Time.unscaledDeltaTime;
 
         StartExperience startExperience1 = startZone1.GetComponent<StartExperience>();
         StartExperience startExperience2 = startZone2.GetComponent<StartExperience>();
@@ -59,14 +71,26 @@ public class PrepareState : IState
 
             bool isFacingAgainst = Vector3.Dot(direction1, direction2) < 0;
 
-            if (isFacingOut && isFacingAgainst)
+            if (isFacingOut && isFacingAgainst && startZoneInitTimer > 4f)
             {
+                if (!isStartCondition)
+                {
+                    isStartCondition = true;
+                    gameStateManager.audioManager.playSound("countdown");
+                }
                 timeElapsed += Time.deltaTime;
             }
             else
             {
+                isStartCondition = false;
+                gameStateManager.audioManager.stopSound("countdown");
                 timeElapsed = 0f;
             }
+        }
+        else
+        {
+            isStartCondition = false;
+            gameStateManager.audioManager.stopSound("countdown");
         }
     }
 
@@ -74,5 +98,14 @@ public class PrepareState : IState
     {
         startZone1.SetActive(false);
         startZone2.SetActive(false);
+
+        gameStateManager.audioManager.FadeOut(
+            "standoff",
+            1f,
+            () =>
+            {
+                gameStateManager.audioManager.FadeIn("duel", 2f, 0.2f, () => { });
+            }
+        );
     }
 }

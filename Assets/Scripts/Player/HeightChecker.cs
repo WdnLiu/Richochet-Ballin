@@ -10,7 +10,7 @@ public class HeightChecker : MonoBehaviour
     private bool isMoving = false;
     private bool hasTriggered = false;
 
-    private float shootCooldown = 1f;
+    private float shootCooldown = .5f;
     public float minDistance = 0.5f;
     public float maxDuration = 0.5f;
 
@@ -39,7 +39,7 @@ public class HeightChecker : MonoBehaviour
             shootBullet();
 
         cooldownIndicator.transform.localScale = new Vector3(
-            Mathf.Clamp(lastShootTime + 1 - Time.time, 0.0f, 1.0f),
+            Mathf.Clamp(lastShootTime + shootCooldown - Time.time, 0.0f, 1.0f),
             1f,
             1f
         );
@@ -138,19 +138,21 @@ public class HeightChecker : MonoBehaviour
             GameObject bullet1 = Instantiate(
                 bulletPrefab,
                 (spawnPosition + 2 * offset) + (forwardDirection * 10f),
-                flatRotation
+                flatRotation * Quaternion.Euler(0, 15, 0)
             );
+            bullet1.GetComponent<BulletMovement>().maxBounces = 3;
             GameObject bullet2 = Instantiate(
                 bulletPrefab,
                 (spawnPosition - 2 * offset) + (forwardDirection * 10f),
-                flatRotation
+                flatRotation * Quaternion.Euler(0, -15, 0)
             );
-
+            bullet2.GetComponent<BulletMovement>().maxBounces = 3;
             GameObject bullet3 = Instantiate(
                 bulletPrefab,
                 (spawnPosition) + (forwardDirection * 10f),
                 flatRotation
             );
+            bullet3.GetComponent<BulletMovement>().maxBounces = 3;
 
             bullet1.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
             bullet2.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
