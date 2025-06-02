@@ -1,5 +1,7 @@
 # Richochet ballin
 
+## Overview
+
 This game is inspired in American western cowboy duels, where they start by walking in opposite directions, and once a certain distance is reached they start to shoot one another.
 
 Our game follows a similar concept, the players start by positioning themselves in a circle and face opposite directions, a visual and sound cue will be given after 2 seconds of positioning themselves like that. Then the duel starts, the players can shoot balls. Each ball will bounce once against the circular limit.
@@ -16,6 +18,10 @@ These powerups cannot be accumulated.
 
 When the game ends it will restart, the initial circles will appear once again, and they will be able to start another duel.
 
+## To Play
+In order to play you can download the build in the release, only Windows is supported.
+The controls are very simple, you should just move the controller around to move your hitbox. There is an arrow showing where you are aiming. And to shoot a bullet, you just need to make a quick vertical gesture from top to bottom. You just need to hover the powerups with your hitbox in order to pick them up.
+
 ## Environment
 
 - 3D Meshes added to the background.
@@ -30,7 +36,9 @@ When the game ends it will restart, the initial circles will appear once again, 
 - Power Ups have an standard animation that rotates them.
 - MultipleShoot Power Up: Represented as 3 bullets and a yellow ring on the player that holds it. The next shoot will spawn 3 bullets.
 - Heart Power Up: Represented as a box with a heart. The player that takes it heals 1 life.
-- Shield Power Up: Represented as a shield and a grey ring on the player that holds it. The next bullet taken by the player is ignored and the shield is lost.
+- Shield Power Up: Represented as a shield and a grey ring on the player that holds it. The next bullet taken by the player Will bounce and the shield is lost.
+- Reverse Power Up: Represented as a Uno reverse card. Exchanges the amount of lifes between players.
+- Asteroid Power Up: Represented as a target. An asteroid falls on the oponent player after a few seconds.
 
 ## Player logic
 
