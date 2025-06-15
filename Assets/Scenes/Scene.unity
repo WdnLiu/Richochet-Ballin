@@ -10852,9 +10852,9 @@ MonoBehaviour:
   plane: {fileID: 530153862}
   blend: {fileID: 185534725}
   backgroundColor: {r: 1, g: 1, b: 1, a: 0}
-  UseOverlapFile: 0
+  UseOverlapFile: 1
   percentageOfCameraOverlap: 15
-  overlapGetFilePath: 
+  overlapGetFilePath: D:/Calibration/Overlap
 --- !u!4 &1982366388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400094, guid: 5d8a4c5c2390fc54e96a652c3eeaf313, type: 3}
