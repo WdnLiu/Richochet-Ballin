@@ -20,6 +20,10 @@ public class Direction : MonoBehaviour
 
         Vector3 flatPosition = transform.position;
         flatPosition.y = 0f;
+        float distance = flatPosition.magnitude;
+        distance = Mathf.Clamp(distance, 0f, 45f);
+        flatPosition.Normalize();
+        flatPosition *= distance;
         directionIndicator.transform.position = flatPosition;
     }
 }
